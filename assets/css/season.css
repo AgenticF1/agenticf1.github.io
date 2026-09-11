@@ -1,0 +1,267 @@
+/* ==========================================================================
+   season.css  —  the Season pace page + per-race breakdown page only.
+   Load AFTER components.css. Nothing else on the site uses these blocks.
+   ========================================================================== */
+
+/* tighter section rhythm than a prose article — these pages are mostly figures */
+.season-page.article > section,
+.race-page.article > section { margin-top: var(--space-6); }
+.season-page.article > section > .section-head,
+.race-page.article > section > .section-head { margin-top: 0; }
+/* the sub-paragraph and the toggle row keep the same breathing room the
+   section head has above the paragraph — symmetric around the buttons */
+.season-page .season-figure__sub { margin-bottom: var(--space-4); }
+.season-page .season-controls { margin-bottom: var(--space-4); }
+
+/* the per-race page's figures need a clear gap under the explanatory
+   paragraph so a chart's own top labels ("fastest") never touch the prose */
+.race-page .season-figure__sub { margin-bottom: var(--space-5); }
+.race-page .coef-readout { margin-top: var(--space-2); }
+
+/* the big season charts break out wider than the prose measure */
+.season-page .season-chart {
+  --w: min(72rem, 95vw);
+  width: var(--w);
+  margin-inline: calc((100% - var(--w)) / 2);
+}
+
+/* --- page intro figures sit in the shared article rhythm --- */
+.season-figure { margin: 0; }
+.season-figure > h2,
+.season-figure > .t-h3 { margin-bottom: var(--space-2); }
+.season-figure__sub {
+  margin-bottom: var(--space-3);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.season-figure__src {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* the chart box itself */
+.season-chart { width: 100%; }
+
+/* a small inline control cluster above a chart (toggle buttons) */
+.season-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+/* --- legend / key row (driver or team swatches) --- */
+.season-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin-top: var(--space-3);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+.season-key > span { display: inline-flex; align-items: center; }
+
+/* ==========================================================================
+   race list  —  "fits by race"
+   ========================================================================== */
+.race-list { list-style: none; margin: 0; padding: 0; }
+.race-list > li { border-top: 1px solid var(--line); }
+.race-list > li:last-child { border-bottom: 1px solid var(--line); }
+
+.race-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2.2rem 1fr 1.5rem;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-4);
+  padding-block: var(--space-4);
+  background: none;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+.race-row:hover .race-row__name { color: var(--accent-ink); }
+.race-row__rnd {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+}
+.race-row__name {
+  display: block;
+  font-size: var(--step-1);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  transition: color var(--dur) var(--ease);
+}
+.race-row__meta {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+}
+.race-row__chev {
+  justify-self: end;
+  font-family: var(--font-mono);
+  font-size: var(--step-1);
+  line-height: 1;
+  color: var(--ink-faint);
+}
+
+/* expanded panel: the fitted parameters + a link to the full breakdown */
+.race-panel {
+  padding: 0 0 var(--space-5) calc(2.2rem + var(--space-4));
+}
+.race-panel[hidden] { display: none; }
+.race-panel__link {
+  display: inline-block;
+  margin-top: var(--space-4);
+  font-size: var(--step-0);
+  color: var(--accent-ink);
+}
+
+@media (max-width: 34rem) {
+  .race-panel { padding-left: 0; }
+}
+
+/* small key/value coefficient readout */
+.coef-readout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: var(--space-3) var(--space-4);
+  margin: 0;
+}
+.coef-readout > div { margin: 0; }
+.coef-readout dt {
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+}
+.coef-readout dd {
+  margin: 2px 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   per-race breakdown page (race.html)
+   ========================================================================== */
+
+/* "what stood out" — a plain prose list, no chart */
+.insight-list { list-style: none; margin: 0; padding: 0; }
+.insight-list > li {
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--line);
+  font-size: var(--step-0);
+  line-height: 1.5;
+}
+.insight-list > li:last-child { border-bottom: 1px solid var(--line); }
+.insight-tag {
+  display: inline-block;
+  margin-right: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+/* "how each effect was fitted" — a grid of small partial-residual charts.
+   This page's whole article sits inside .container--narrow (800px), so
+   an auto-fit/1fr track never actually balloons the way it can on an
+   unconstrained wide layout — it settles around 2 columns of ~370px each
+   here. No cap needed; letting the tracks use their full 1fr keeps them
+   at the width the page's own container allows instead of an arbitrary
+   ceiling under that. */
+.explain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: var(--space-4);
+}
+/* Matches the site's shared .card component (components.css) rather than
+   its own one-off styling — same padding/radius, no border (the site's
+   convention is background-only; border is an explicit .card--outline
+   opt-in elsewhere), and the same light/dark surface swap. */
+.explain-panel {
+  margin: 0;
+  padding: var(--space-5);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+}
+:root:not([data-theme="light"]) .explain-panel,
+:root[data-theme="dark"] .explain-panel { background: var(--surface-2); }
+.explain-panel__t {
+  margin: 0 0 var(--space-1);
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--ink);
+}
+/* the fitted-effect size ("fight -0.21  lapping -0.03 s") — plain HTML so
+   it shares the card's own padding and lines up with .explain-panel__t
+   above it, rather than living inside the chart canvas where it can only
+   ever be positioned in canvas-local coordinates. */
+.explain-panel__sub {
+  margin: 0 0 var(--space-2);
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+}
+.explain-chart-wrap { position: relative; }
+.explain-chart { width: 100%; height: 240px; }
+/* the y-axis unit ("residual (s)") — plain CSS-rotated overlay outside the
+   ECharts canvas, for the same reason as .explain-panel__sub above:
+   ECharts' own rotated yAxis.name + containLabel proved unreliable across
+   several attempts (rendered off-canvas, floated unaligned with the axis,
+   overlapped the tick numbers) because the interaction itself is fragile,
+   not any one set of pixel values. This sits beside the canvas rather
+   than inside it, so its position is ordinary, predictable CSS. */
+.explain-axis-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* vertical-rl + a 180° flip reads bottom-to-top (the standard axis-label
+     convention) with zero manual rotate-origin math — trivially centered
+     by ordinary flexbox instead of hand-computed translate/rotate offsets. */
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-s);
+  font-size: var(--step-0);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+.cta:hover { background: var(--surface-2); text-decoration: none; }
+.cta--primary {
+  border-color: var(--accent);
+  background: var(--accent-quiet);
+  color: var(--accent-ink);
+}

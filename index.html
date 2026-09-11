@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgenticF1</title>
+<meta name="description" content="AgenticF1 points agentic tools, code, simulators and statistical models at the data behind a Formula 1 Grand Prix. We measure race and qualifying pace and answer the questions it leaves open.">
+
+<!-- pre-paint theme: keep this inline so there is no flash on load -->
+<script>
+  try {
+    var m = localStorage.getItem("theme");
+    if (m === "light" || m === "dark") document.documentElement.setAttribute("data-theme", m);
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/nav.js" defer></script>
+<script src="assets/js/posts.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-title" href="index.html">AgenticF1</a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="index.html">Blogs</a>
+        <a href="season-pace.html">Season pace</a>
+        <a href="about.html">About</a>
+        <button class="btn theme-toggle" data-theme-toggle type="button" aria-label="Change theme">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="8" cy="8" r="3.2"/>
+            <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M13 3l-1.4 1.4M4.4 11.6L3 13" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container container--narrow flow-loose">
+
+      <section class="measure flow">
+        <p class="t-eyebrow">Formula 1 · Agentic Analysis</p>
+        <h1 class="t-h1">The data, and the possibilities, behind a Grand Prix.</h1>
+        <p class="t-deck">
+          AgenticF1 works from the feeds beneath a Formula 1 weekend. We point agentic tools,
+          code, simulators and statistical models at the data behind a Grand Prix. We measure
+          race and qualifying pace, and raise and answer the questions it leaves open. Human
+          and agents, working together.
+        </p>
+      </section>
+
+      <section class="flow">
+        <div data-post-filter></div>
+        <div data-posts data-posts-src="posts/posts.json" data-posts-limit="0">
+          <p class="t-note">Loading posts…</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>AgenticF1</span>
+      <span class="t-faint">Analysis is descriptive, not predictive. Data: OpenF1.</span>
+      <a href="about.html">About &amp; method</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

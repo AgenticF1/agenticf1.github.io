@@ -1,0 +1,188 @@
+/* ==========================================================================
+   blog.css  —  article-page only. Load AFTER components.css on post pages.
+   The site frame (header/footer/tokens) is shared; this is just the story.
+   ========================================================================== */
+
+.article { max-width: var(--measure); }
+.article.center { margin-inline: auto; }
+
+.article__header { margin-bottom: var(--space-6); }
+.article__header .t-eyebrow { display: block; margin-bottom: var(--space-3); }
+.article__title { margin-bottom: var(--space-4); }
+.article__dek { font-size: var(--step-1); line-height: 1.5; color: var(--ink-muted); }
+.article__byline {
+  margin-top: var(--space-4);
+  font-size: var(--step--1);
+  font-family: var(--font-mono);
+  color: var(--ink-faint);
+  display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3);
+}
+
+/* --- section rhythm --- */
+.article > section { margin-top: var(--space-8); }
+.article > section > :is(h2, .section-head) { scroll-margin-top: var(--space-5); }
+
+.section-head {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 2px solid var(--ink);
+  margin-bottom: var(--space-4);
+  scroll-margin-top: var(--space-5);
+}
+.section-head .t-eyebrow { display: block; margin-bottom: var(--space-2); }
+/* a section-head immediately after a part divider: drop the second rule */
+.part + .section-head { margin-top: var(--space-4); padding-top: 0; border-top: 0; }
+/* the deck paragraph that follows a section-head */
+.section-head + .t-deck { margin-bottom: var(--space-5); }
+
+/* a heavier divider for top-level "parts" — sits a step above a section-head */
+.part {
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: 3px solid var(--accent);
+}
+.part__k {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: var(--space-2);
+}
+.part__d { font-size: var(--step-2); font-weight: 600; }
+
+/* --- cards inside an article --- */
+.article .card { margin-block: 0; }
+.article .card > h3 {
+  font-size: var(--step-2);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.article .card > h3 + * { margin-top: var(--space-3); }
+.article .card .chart { margin-top: var(--space-3); }
+
+/* --- body copy inside an article --- */
+.article p { margin-block: 0; }
+.article :is(p, ul, ol, .card, .pull, .quote, .finding, figure) + :is(p, ul, ol, .card, .pull, .quote, .finding, figure) {
+  margin-top: var(--space-4);
+}
+.article ul, .article ol { padding-left: 1.25rem; }
+.article li + li { margin-top: var(--space-2); }
+
+/* --- figure / chart holder --- */
+.figure { margin: 0; }
+.figure > h3, .figure > .t-h3 { margin-bottom: var(--space-3); }
+.figure__cap { margin-top: var(--space-3); font-size: var(--step--1); line-height: 1.5; color: var(--ink-faint); }
+.figure__note { margin-bottom: var(--space-3); font-size: var(--step--1); line-height: 1.5; color: var(--ink-muted); }
+.chart { width: 100%; }
+
+/* stacked charts inside one figure sit tight */
+.figure .chart + .chart { margin-top: var(--space-2); }
+
+/* --- track-map figure: SVG beside an explanatory column --- */
+.figure__map { display: flex; flex-wrap: wrap; gap: var(--space-5); align-items: flex-start; }
+.figure__map > svg, .figure__map > :first-child { flex: none; max-width: 100%; }
+.figure__map > .figure__map-aside { flex: 1; min-width: 220px; }
+.map-legend {
+  display: flex; flex-wrap: wrap;
+  gap: var(--space-1) var(--space-5);
+  margin-top: var(--space-3);
+  font-size: var(--step--1); color: var(--ink-muted);
+}
+.map-legend > span { display: inline-flex; align-items: center; }
+
+/* --- maths block (KaTeX, via assets/js/math.js) --- */
+.formula { color: var(--ink); }
+.formula .katex { font-size: 1.05em; }
+.formula .katex-display {
+  margin: 0.15em 0;
+  text-align: left;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.tex-line + .tex-line { margin-top: 0.1em; }
+.tex-caption {
+  margin-top: var(--space-2);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+/* theme-safe term colours — set via \htmlClass{} in the TeX source */
+.tex-accent { color: var(--accent-ink); }
+.tex-neg    { color: var(--neg); }
+/* fallback for a plain-text formula (no KaTeX): keep it monospace */
+.formula:not(:has(.katex)) { font-family: var(--font-mono); line-height: 2; }
+.formula:not(:has(.katex)) sup { font-size: 0.75em; }
+
+/* --- findings that carry a bare <b> kicker (article idiom) --- */
+.finding > b:first-child {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: var(--space-1);
+}
+.finding p + p { margin-top: var(--space-3); }
+.finding p b, .finding p strong { font-weight: 600; color: var(--ink); }
+
+/* --- in-article table of contents (side rail) ---
+   Compact (11px) like the original hand-built rail, but with the shared
+   scrollspy + part-group behaviour and auto-numbered entries.             */
+.toc { font-size: 11px; line-height: 1.4; }
+.toc__title {
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: var(--space-2);
+}
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li { margin: 0; }
+.toc a {
+  display: flex;
+  padding: 2px 0 2px var(--space-2);
+  border-left: 2px solid var(--line);
+  color: var(--ink-muted);
+}
+.toc a:hover { color: var(--ink); text-decoration: none; }
+.toc a[aria-current="true"] {
+  color: var(--ink);
+  border-left-color: var(--accent);
+}
+.toc__n {
+  flex: none;
+  width: 1.3em;
+  font-family: var(--font-mono);
+  color: var(--ink-faint);
+}
+.toc a[aria-current="true"] .toc__n { color: var(--accent-ink); }
+.toc__group {
+  margin-top: var(--space-3);
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.toc__group:first-child { margin-top: 0; }
+.toc__group a { border-left: 0; padding-left: 0; color: var(--ink); }
+.toc__group a:hover { color: var(--ink); }
+
+/* --- method / appendix note at article end --- */
+.method {
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  line-height: 1.65;
+}
+.method b { color: var(--ink); }
+
+/* --- previous/next nav --- */
+.post-nav {
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  font-size: var(--step-0);
+}

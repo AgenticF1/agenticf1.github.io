@@ -1,0 +1,109 @@
+/* ==========================================================================
+   tokens.css  —  design tokens only. No selectors that paint layout here.
+   Every colour, space, radius, type step the site uses is named once, below.
+   Light is the base; dark overrides only the values that change.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* --- surfaces & ink (cool neutral greys) --- */
+  --bg:            #F3F4F6;
+  --surface:       #FBFBFC;
+  --surface-2:     #EBEDF0;
+  --ink:           #1B1F24;
+  --ink-muted:     #59626D;
+  --ink-faint:     #909AA4;
+
+  /* --- lines --- */
+  --line:          #DEE1E6;
+  --line-strong:   #C6CCD3;
+
+  /* --- accent & signal (muted, non-dramatic) --- */
+  --accent:        #3A6EA5;
+  --accent-ink:    #2C567F;   /* accent text on light surface, AA */
+  --accent-quiet:  #E9EFF5;   /* accent-tinted fill */
+  --pos:           #2E7D6B;
+  --neg:           #A9543E;
+
+  /* --- typography --- */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --step--1: 0.8125rem;   /* 13px  fine print, captions      */
+  --step-0:  0.9375rem;   /* 15px  body                      */
+  --step-1:  1.0625rem;   /* 17px  deck / lead               */
+  --step-2:  1.25rem;     /* 20px  h3 / section titles       */
+  --step-3:  1.5rem;      /* 24px  h2                        */
+  --step-4:  clamp(1.75rem, 1.2rem + 2.4vw, 2.5rem); /* h1   */
+
+  --leading-tight: 1.2;
+  --leading-body:  1.6;
+
+  /* --- spacing scale (rem, 4px base) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  /* --- radius --- */
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 14px;
+
+  /* --- layout --- */
+  --content: 800px;        /* the content box width, shared by index + articles
+                              so navigating between them shows no width jump   */
+  --measure: var(--content); /* readable prose width */
+  --page-max: 68rem;       /* full page width (outer frame / rails)  */
+  --page-pad: clamp(1rem, 0.5rem + 2vw, 1.75rem);
+
+  /* --- motion --- */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur: 160ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg:           #15181B;
+    --surface:      #1C2023;
+    --surface-2:    #23282D;
+    --ink:          #E3E6E9;
+    --ink-muted:    #99A2AB;
+    --ink-faint:    #626A72;
+    --line:         #2B3136;
+    --line-strong:  #3B434B;
+    --accent:       #6FA0CE;
+    --accent-ink:   #8FB6D8;
+    --accent-quiet: #1E2A35;
+    --pos:          #58B29B;
+    --neg:          #CE8168;
+  }
+}
+
+/* explicit toggle wins in both directions */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:           #15181B;
+  --surface:      #1C2023;
+  --surface-2:    #23282D;
+  --ink:          #E3E6E9;
+  --ink-muted:    #99A2AB;
+  --ink-faint:    #626A72;
+  --line:         #2B3136;
+  --line-strong:  #3B434B;
+  --accent:       #6FA0CE;
+  --accent-ink:   #8FB6D8;
+  --accent-quiet: #1E2A35;
+  --pos:          #58B29B;
+  --neg:          #CE8168;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur: 0ms; }
+}

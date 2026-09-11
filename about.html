@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — AgenticF1</title>
+<meta name="description" content="Who writes AgenticF1, why it exists, and roughly how the analysis pipeline is put together.">
+
+<script>
+  try {
+    var m = localStorage.getItem("theme");
+    if (m === "light" || m === "dark") document.documentElement.setAttribute("data-theme", m);
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/blog.css">
+
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/nav.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-title" href="index.html">AgenticF1</a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="index.html">Blogs</a>
+        <a href="season-pace.html">Season pace</a>
+        <a href="about.html">About</a>
+        <button class="btn theme-toggle" data-theme-toggle type="button" aria-label="Change theme">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="8" cy="8" r="3.2"/>
+            <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M13 3l-1.4 1.4M4.4 11.6L3 13" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container container--narrow">
+      <article class="article flow">
+
+        <header class="article__header">
+          <p class="t-eyebrow">About</p>
+          <h1 class="t-h1 article__title">Who writes this, and why</h1>
+          <p class="article__dek">
+            AgenticF1 is a personal project. A little background still helps, so you know
+            what the analysis is good for and where it is thin.
+          </p>
+        </header>
+
+        <section>
+          <div class="section-head" id="who">
+            <p class="t-eyebrow">Section 01</p>
+            <h2 class="t-h2">Who writes this</h2>
+          </div>
+          <p>
+            I hold a PhD in computer science and follow Formula 1 closely. My research was in
+            3D modeling, agents, planning, and a little physics simulation. My thesis title?
+            You guess.
+          </p>
+          <p>
+            What that means for the analysis: the part I am confident in is the modeling. Going
+            from raw data, to a model, to checking whether the model is really saying
+            something, to wiring it into an agentic system that does most of the work with me
+            in the loop. That is the background these posts lean on.
+          </p>
+          <p>
+            Where I am weak: I have no serious mechanical or aerodynamics background, so I have
+            little to say about why a car is built the way it is. When a result turns on that,
+            I say so rather than guess.
+          </p>
+          <p>
+            No team affiliation and no inside information. Everything here comes from public
+            data. I am fairly neutral on the entire field.
+          </p>
+        </section>
+
+        <section>
+          <div class="section-head" id="why">
+            <p class="t-eyebrow">Section 02</p>
+            <h2 class="t-h2">Why I build this</h2>
+          </div>
+          <p>
+            When I watch a race I spend as much time on the onboards and the detailed timing
+            data as on the broadcast. I have been told this is an ADHD trait. It might be.
+          </p>
+          <p>
+            Mostly I come away with questions. Why did one team split their runs like that and
+            another pair their cars? What if the safety car had come three laps later? How
+            fast was this driver actually going, once you take out the strategy and the
+            tyres?
+          </p>
+          <p>
+            The community has done the hard work of opening up data that can answer some of
+            this. AgenticF1 is me using it on my own questions, and sharing the answers that
+            turned out to be interesting.
+          </p>
+        </section>
+
+        <section>
+          <div class="section-head" id="pipeline">
+            <p class="t-eyebrow">Section 03</p>
+            <h2 class="t-h2">The pipeline and the model</h2>
+          </div>
+          <p>
+            AgenticF1 is a set of pipelines that model and analyze qualifying and race pace.
+            On top of the shared model, some weekends get purpose-built tools for a specific
+            race or situation, so the analysis can be more complete and more targeted.
+          </p>
+          <p>
+            The posts are the best way to see what I have actually built.
+          </p>
+        </section>
+
+        <section>
+          <div class="section-head" id="contact">
+            <p class="t-eyebrow">Section 04</p>
+            <h2 class="t-h2">Contact</h2>
+          </div>
+          <p>
+            Questions, corrections, or a race you want looked at:
+            <a class="email-link" data-user="f1.agentic" data-domain="gmail.com" href="#"
+               rel="nofollow">f1.agentic&#32;[at]&#32;gmail&#32;[dot]&#32;com</a>.
+          </p>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>AgenticF1</span>
+      <span class="t-faint">Analysis is descriptive, not predictive. Data: OpenF1.</span>
+      <a href="index.html">All blogs</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // assemble the mailto link on load so the raw address is not in the HTML source
+  document.querySelectorAll("a.email-link").forEach(function (a) {
+    var addr = a.dataset.user + "@" + a.dataset.domain;
+    a.href = "mailto:" + addr;
+    a.textContent = addr;
+  });
+</script>
+</body>
+</html>

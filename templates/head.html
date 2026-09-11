@@ -1,0 +1,35 @@
+<!-- ===========================================================================
+  Shared <head> reference. GitHub Pages has no build step / includes, so this
+  markup is copied into each page. Adjust the asset path prefix per location:
+    site root (index.html, about.html) : href="assets/..."
+    /blog/*.html                       : href="../assets/..."
+  Keep the pre-paint theme script FIRST and inline — it prevents a flash.
+  =========================================================================== -->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PAGE TITLE — AgenticF1</title>
+<meta name="description" content="ONE SENTENCE.">
+
+<script>
+  try {
+    var m = localStorage.getItem("theme");
+    if (m === "light" || m === "dark") document.documentElement.setAttribute("data-theme", m);
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<!-- article pages only: -->
+<!-- <link rel="stylesheet" href="assets/css/blog.css"> -->
+
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/nav.js" defer></script>
+<!-- index only:   <script src="assets/js/posts.js" defer></script> -->
+<!-- article only:  <script src="assets/js/toc.js" defer></script>  -->

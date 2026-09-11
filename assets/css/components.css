@@ -1,0 +1,224 @@
+/* ==========================================================================
+   components.css  —  small reusable UI pieces. Each block is independent;
+   delete one and nothing else breaks.
+   ========================================================================== */
+
+/* --- button / control ------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font: inherit;
+  font-size: var(--step--1);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.btn:hover { background: var(--surface-2); text-decoration: none; }
+.btn[aria-pressed="true"] {
+  background: var(--accent-quiet);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* --- theme toggle --------------------------------------------------- */
+.theme-toggle {
+  width: 36px; height: 36px;
+  padding: 0;
+  justify-content: center;
+}
+.theme-toggle svg { width: 16px; height: 16px; }
+
+/* --- card --------------------------------------------------------- */
+/* borderless by design: separation is the background step, not an outline */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  padding: var(--space-5);
+}
+:root:not([data-theme="light"]) .card,
+:root[data-theme="dark"] .card { background: var(--surface-2); }
+.card--flush { padding: 0; overflow: hidden; }
+.card--outline { border: 1px solid var(--line); }
+.card__src {
+  margin-top: var(--space-3);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+.card > h3 + *, .card > .t-h3 + * { margin-top: var(--space-3); }
+
+/* --- inline colour swatch (chart / map legend key) ------------------
+   NB: distinct from .chip below (the tag-filter control) — do not merge. */
+.swatch {
+  display: inline-block;
+  width: 9px; height: 9px;
+  border-radius: 2px;
+  margin-right: var(--space-2);
+  vertical-align: baseline;
+  flex: none;
+}
+
+/* --- tag / filter chip ------------------------------------------------ */
+.tag {
+  display: inline-block;
+  padding: 2px var(--space-2);
+  font-size: var(--step--1);
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+  background: var(--surface-2);
+  border-radius: var(--radius-s);
+}
+.tag--link:hover { color: var(--ink); text-decoration: none; background: var(--line); }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.chip {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.chip:hover { color: var(--ink); }
+.chip[aria-pressed="true"] {
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  background: var(--accent-quiet);
+}
+
+/* --- post list (index) --------------------------------------------- */
+.post-list { list-style: none; margin: 0; padding: 0; }
+.post-list > li { border-top: 1px solid var(--line); }
+.post-list > li:last-child { border-bottom: 1px solid var(--line); }
+
+.post-item {
+  display: grid;
+  gap: var(--space-1) var(--space-5);
+  grid-template-columns: 1fr;
+  padding-block: var(--space-5);
+  color: inherit;
+}
+.post-item:hover { text-decoration: none; }
+.post-item:hover .post-item__title { color: var(--accent-ink); }
+.post-item__meta {
+  font-size: var(--step--1);
+  font-family: var(--font-mono);
+  color: var(--ink-faint);
+}
+.post-item__title {
+  font-size: var(--step-2);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  transition: color var(--dur) var(--ease);
+}
+.post-item__dek { color: var(--ink-muted); font-size: var(--step-0); }
+.post-item__tags { margin-top: var(--space-2); }
+
+@media (min-width: 44rem) {
+  .post-item {
+    grid-template-columns: 8.5rem 1fr;
+  }
+  .post-item__meta { padding-top: 3px; }
+}
+
+/* --- prose findings & callouts (shared by index + articles) --------- */
+.finding {
+  border-left: 3px solid var(--accent);
+  padding-left: var(--space-4);
+}
+.finding__k {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: var(--space-1);
+}
+
+.pull {
+  font-size: var(--step-1);
+  font-weight: 500;
+  line-height: 1.45;
+  border-block: 1px solid var(--line-strong);
+  padding-block: var(--space-4);
+}
+
+.quote {
+  border-left: 3px solid var(--line-strong);
+  padding-left: var(--space-4);
+  font-size: var(--step-1);
+  color: var(--ink);
+}
+.quote cite {
+  display: block;
+  margin-top: var(--space-2);
+  font-style: normal;
+  font-size: var(--step--1);
+  font-family: var(--font-mono);
+  color: var(--ink-muted);
+}
+
+/* --- data table ---------------------------------------------------- */
+.table-scroll { overflow-x: auto; }
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+.table th, .table td {
+  text-align: right;
+  padding: var(--space-2) var(--space-3);
+  white-space: nowrap;
+}
+.table th {
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  border-bottom: 1px solid var(--line-strong);
+}
+.table td { border-bottom: 1px solid var(--line); }
+.table tbody tr:last-child td { border-bottom: 0; }
+.table :is(th, td).l { text-align: left; white-space: normal; }
+
+/* fixed layout — let long left-column labels wrap instead of stretching */
+.table.fixed { table-layout: fixed; }
+.table.fixed :is(th, td).l { white-space: normal; }
+
+/* a spanning group-label row inside a table body */
+.table td.grp {
+  padding-top: var(--space-4);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+/* an emphasised row */
+.table tr.em td { background: var(--accent-quiet); }
+.table tr.em td.l { font-weight: 600; }
+
+/* --- signal colours (numbers) --- */
+.is-pos { color: var(--pos); }
+.is-neg { color: var(--neg); }
+
+/* --- inline badge --- */
+.badge {
+  display: inline-block;
+  padding: 1px var(--space-2);
+  font-size: var(--step--1);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-s);
+  color: var(--ink-muted);
+}

@@ -1,0 +1,13 @@
+{
+  "//": "The post index. Newest first is not required — posts.js sorts by date.",
+  "//fields": "title, date (YYYY-MM-DD), url (relative to site root), dek, tags[], draft (optional bool)",
+  "posts": [
+    {
+      "title": "Nobody qualified on pace",
+      "date": "2026-09-05",
+      "url": "blog/2026-09-05-nobody-qualified-on-pace.html",
+      "dek": "Every clean-air lap in Q3 at Monza trapped the same speed. The grid was strung out by slipstream, not by the cars.",
+      "tags": ["qualifying", "2026"]
+    }
+  ]
+}

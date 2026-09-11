@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Season pace — AgenticF1</title>
+<meta name="description" content="Every 2026 Grand Prix, each driver's and team's underlying race pace, fitted with the parameter set that race's own data supports — and why that set was chosen.">
+
+<script>
+  try {
+    var m = localStorage.getItem("theme");
+    if (m === "light" || m === "dark") document.documentElement.setAttribute("data-theme", m);
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/blog.css">
+<link rel="stylesheet" href="assets/css/season.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.6.0/echarts.min.js"></script>
+<script src="assets/js/charts.js"></script>
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/nav.js" defer></script>
+<script src="assets/js/season-pace.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-title" href="index.html">AgenticF1</a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="index.html">Blogs</a>
+        <a href="season-pace.html" aria-current="page">Season pace</a>
+        <a href="about.html">About</a>
+        <button class="btn theme-toggle" data-theme-toggle type="button" aria-label="Change theme">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="8" cy="8" r="3.2"/>
+            <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M13 3l-1.4 1.4M4.4 11.6L3 13" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container container--narrow">
+      <article class="article flow season-page">
+
+        <header class="article__header">
+          <p class="t-eyebrow">2026 season</p>
+          <h1 class="t-h1 article__title">Race pace, race by race</h1>
+          <p class="article__dek">
+            Every 2026 Grand Prix and Sprint, each driver's underlying race pace once
+            fuel load, tyre age, traffic and track conditions are modelled out. Each race
+            is fitted with the parameter set its own data supports — not one fixed recipe —
+            and every choice is shown with the reasoning behind it.
+          </p>
+        </header>
+
+        <section>
+          <div class="section-head" id="drivers">
+            <p class="t-eyebrow">Section 01</p>
+            <h2 class="t-h2">Drivers</h2>
+          </div>
+          <p class="season-figure__sub">
+            How far off the fastest car each driver was in every race, shown as a
+            percentage of the fastest lap — that removes the lap-length bias that makes
+            a tenth at Spa look like a tenth at Monaco. Switch to raw seconds below;
+            hover any cell for both. Rows are ordered by season average, the last column.
+          </p>
+          <div class="season-controls" id="driver-controls"></div>
+          <div id="c_drivers" class="season-chart" style="height:640px"></div>
+        </section>
+
+        <section>
+          <div class="section-head" id="teams">
+            <p class="t-eyebrow">Section 02</p>
+            <h2 class="t-h2">Teams</h2>
+          </div>
+          <p class="season-figure__sub">
+            Team pace — the average of a team's two cars — race by race, on the same
+            metric and the same column positions as the driver grid above, so the two
+            read together. A <strong>×</strong> marks a race the team missed entirely.
+          </p>
+          <div id="c_teams" class="season-chart" style="height:480px"></div>
+        </section>
+
+        <section>
+          <div class="section-head" id="races">
+            <p class="t-eyebrow">Section 03</p>
+            <h2 class="t-h2">Fits by race</h2>
+          </div>
+          <p>
+            Each race is fitted with the pace-model settings its own data supports. Open a
+            race for the fitted effects it removed from every lap — tyre wear, fuel burn,
+            dirty air, and the rest; the full breakdown is one click further.
+          </p>
+          <ul class="race-list" id="race-list"></ul>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>AgenticF1</span>
+      <span class="t-faint">Analysis is descriptive, not predictive. Data: OpenF1.</span>
+      <a href="about.html">About &amp; method</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

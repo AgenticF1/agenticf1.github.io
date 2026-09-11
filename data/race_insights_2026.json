@@ -1,0 +1,128 @@
+{
+  "2026-03-08_Australia_Race": [
+    { "tag": "Teams", "text": "Mercedes had the fastest average team pace of the season opener, Ferrari 0.46s back in 2nd — and Mercedes would go on to lead team pace in 11 of the season's first 17 sessions. Red Bull, despite Verstappen's individual pace, was only 4th as a team, a pattern that held all year: Red Bull never once topped the team-pace table, because Hadjar's number drags their average down." },
+    { "tag": "Pace vs result", "text": "George Russell won the race despite only the 2nd-quickest individual pace, 0.013s behind team-mate Antonelli — the first of four 2026 wins for Russell where he didn't have the fastest lap in the field." },
+    { "tag": "Teams", "text": "Haas had its best team-pace showing of the season here and in the following race in China (both 5th) — every other 2026 race, it settled into the 8th-9th range instead." },
+    { "tag": "Teammates", "text": "Fernando Alonso beat Lance Stroll by 0.67s, more than double Aston Martin's usual 2026 gap and their widest margin of the season so far. Max Verstappen's 1.10s margin over Isack Hadjar was similarly one of Red Bull's biggest of the year — bigger than every other race except the Zandvoort sprint, where a stand-in team-mate was in the other car." },
+    { "tag": "Pace vs result", "text": "Esteban Ocon had the 7th-quickest pace but finished 11th, while Alexander Albon and Sergio Perez both finished four places better than their raw pace suggested." },
+    { "tag": "Fit", "text": "The season opener's pace order was unusually sensitive to how traffic gets modeled — a 3-place reshuffle between variants, on the high end for 2026." }
+  ],
+  "2026-03-15_China_Race": [
+    { "tag": "Teams", "text": "Mercedes' team-pace lead over Ferrari widened to 0.56s, while Alpine (3rd) and Red Bull (4th) were separated by just 0.05s — a midfield team running level with a top-4 team on raw pace." },
+    { "tag": "Pace vs result", "text": "Antonelli won again, this time with only the 2nd-quickest pace behind team-mate Russell — his only win of the season not on the outright fastest car that day." },
+    { "tag": "Pace vs result", "text": "Max Verstappen retired at lap 46 of 56 after showing the 6th-quickest pace — too early to be classified — while Carlos Sainz and Valtteri Bottas both finished several places clear of what their raw pace predicted." },
+    { "tag": "Teammates", "text": "Both Alpine (Gasly 0.68s clear of Colapinto) and Haas (Bearman 0.52s clear of Ocon) posted their widest team-mate gap of the season so far — a rough weekend for the second driver at both teams." },
+    { "tag": "Teammates", "text": "China was the only race this season where George Russell out-paced team-mate Kimi Antonelli — by a slim 0.075s — in what's otherwise been a lopsided battle in Antonelli's favor." }
+  ],
+  "2026-03-29_Japan_Race": [
+    { "tag": "Teams", "text": "Mercedes' team-pace lead shrank to just 0.21s over McLaren, with Ferrari within 0.09s of McLaren for 3rd — the top three were functionally a three-way tie on raw team pace, even though Mercedes still won comfortably." },
+    { "tag": "Pace vs result", "text": "Antonelli won with the outright fastest individual pace, his most straightforward win of the season by margin." },
+    { "tag": "Pace vs result", "text": "Fernando Alonso had the slowest raw pace of anyone in the field at Suzuka but still finished 18th, four places better than his pace alone predicted. Oliver Bearman's last-place finish, by contrast, reflects an early retirement (lap 21 of 53) rather than a pace collapse — he'd actually shown the 15th-best pace beforehand." },
+    { "tag": "Teammates", "text": "Alpine's gap widened again — Gasly's 0.83s margin over Colapinto is the largest of any pairing in any 2026 race so far — while McLaren's Piastri beat Norris by just 0.06s, one of only two races all season Piastri has had the edge on pace." },
+    { "tag": "Fit", "text": "This is the most statistically reliable race fit of the 2026 season so far, so its pace deltas can be read with unusual confidence." }
+  ],
+  "2026-05-02_United_States_Sprint": [
+    { "tag": "Teams", "text": "McLaren had the fastest team pace of the sprint — its first session on top all year — with Mercedes and Ferrari both within 0.25s, the tightest three-way top order of any 2026 session up to this point." },
+    { "tag": "Pace vs result", "text": "Norris won from the fastest car on pace — a more straightforward kind of win than the several Mercedes would go on to take from 2nd, 3rd or 4th on raw pace later in the season." },
+    { "tag": "Fit", "text": "One of the two least statistically certain sessions of the season — a short sprint simply doesn't give the model enough laps to pin down pace precisely." },
+    { "tag": "Teammates", "text": "Ferrari, Red Bull and Williams all had wider-than-usual gaps between team-mates this sprint; Red Bull's, at just over a second, was its biggest of the season." },
+    { "tag": "Pace vs result", "text": "Alexander Albon had the 11th-quickest pace but finished 19th, while Esteban Ocon finished 12th despite only the 16th-best pace." }
+  ],
+  "2026-05-03_United_States_Race": [
+    { "tag": "Teams", "text": "McLaren retained the fastest team pace from the sprint into the race, Mercedes 0.14s back — one of six 2026 sessions where Mercedes wasn't the fastest team on average." },
+    { "tag": "Pace vs result", "text": "McLaren had the fastest average team pace here, yet Kimi Antonelli still had the single fastest individual lap in the field and duly won — a case of one driver outpacing an entire rival team's average." },
+    { "tag": "Teammates", "text": "Every closely-matched team's gap blew out this weekend — Mercedes' Antonelli was 0.72s clear of Russell (five times their usual margin), and Cadillac's Perez was 1.73s up on Bottas, the widest team-mate gap of any pairing in any 2026 race." },
+    { "tag": "Fit", "text": "Behind only Monaco, this was the most model-sensitive race of the season, and the fit leans on thin per-team samples for four different teams." },
+    { "tag": "Pace vs result", "text": "Charles Leclerc had the 3rd-quickest pace but finished 6th, a mild step back from where his pace alone would have put him." }
+  ],
+  "2026-05-23_Canada_Sprint": [
+    { "tag": "Teams", "text": "McLaren had the fastest team pace of the sprint by a hair — just 0.03s clear of Mercedes, the tightest 1st-2nd team-pace margin of the season outside Monaco (whose numbers are separately flagged as unreliable) — but collapsed to 4th in Sunday's race, over a second off Mercedes. No other team's rank swung that hard between the two sessions of one weekend." },
+    { "tag": "Pace vs result", "text": "George Russell won the sprint despite only the 4th-quickest pace (0.28s off McLaren) — the second of his four 2026 wins that didn't come from the fastest car." },
+    { "tag": "Tyre", "text": "This is the only 2026 session where the soft and medium tyres were fitted separate degradation curves, and the medium's came out slightly negative — it looked like it got faster with age over the sprint, more a sign of the track rubbering in than real tyre wear." },
+    { "tag": "Fit", "text": "The shakiest overall fit of the season — the widest confidence intervals and one of the two lowest R² values, alongside a dirty-air pace cost more than double the season median, typical of a short, high-variance sprint." },
+    { "tag": "Teammates", "text": "An unusually chaotic sprint for team-mates — five different teams (Alpine, Aston Martin, Cadillac, Racing Bulls and Williams) all posted their widest gap of the season in this one race." },
+    { "tag": "Teammates", "text": "The one exception to Red Bull's usual pattern: Isack Hadjar actually out-paced Max Verstappen here, by 0.21s — the only session all season that's happened — before retiring at lap 20 of 23." },
+    { "tag": "Pace vs result", "text": "Isack Hadjar's retirement aside, Esteban Ocon and Valtteri Bottas both finished several places ahead of what their raw pace predicted." }
+  ],
+  "2026-05-24_Canada_Race": [
+    { "tag": "Teams", "text": "McLaren's team pace collapsed to 4th here (1.09s off Mercedes), a day after leading the sprint — the sharpest sprint-to-race pace swing of any team all season." },
+    { "tag": "Pace vs result", "text": "Antonelli won with the outright fastest pace, in stark contrast to McLaren's own drivers, who had led the field on raw pace just one day earlier." },
+    { "tag": "Tyre", "text": "Montreal showed essentially no tyre degradation this year — the flattest curve of any 2026 race, with tyres barely slowing (and by the model's math even marginally speeding up) with age." },
+    { "tag": "Track", "text": "Track temperature mattered more at Montreal than anywhere else this season — hotter track correlated with meaningfully faster laps, the strongest such relationship of any 2026 race." },
+    { "tag": "Pace vs result", "text": "Both George Russell (retiring lap 30 of 68 after the 2nd-best pace) and Lando Norris (retiring lap 39 after 7th-best pace) had strong races ended early, while Liam Lawson and Lance Stroll both finished well clear of what their raw pace predicted." },
+    { "tag": "Teammates", "text": "Team-mate gaps widened across the board — Cadillac, Haas, Williams, Aston Martin and Ferrari (Hamilton 0.35s clear of Leclerc, one of his bigger margins all season) all posted wider-than-usual splits, Haas's (Bearman over Ocon) more than four times its season norm." }
+  ],
+  "2026-06-07_Monaco_Race": [
+    { "tag": "Fit", "text": "Monaco's pace numbers this year are essentially unreliable — the model explains almost none of the lap-time variation, the lowest of any 2026 race, and the fitted order can swing by as much as 17 grid places depending on modeling choices. Read every number here as a rough approximation." },
+    { "tag": "Teams", "text": "Ferrari edged out Mercedes for fastest team pace by a mere 0.026s — but Antonelli won anyway. Ferrari had the fastest average team pace twice this season (here and at Zandvoort) and converted neither into a win, the opposite problem from its two actual wins, both of which came in races Mercedes' team pace was faster." },
+    { "tag": "Track", "text": "Running wheel-to-wheel cost far more time at Monaco than anywhere else this season — the model's cost of a close battle was more than five times the season median, unsurprising for the tightest track on the calendar." },
+    { "tag": "Pace vs result", "text": "Lando Norris (2nd-best pace) retired just past half distance (lap 44 of 78), and Charles Leclerc (3rd-best) retired late enough (lap 65 of 78) to fall short of classification; Sergio Perez, by contrast, finished 10th despite only the 20th-quickest pace." },
+    { "tag": "Teammates", "text": "Monaco also produced the season's widest team-mate gap yet at both Mercedes and McLaren — but given how unreliable this race's overall fit is, that's as likely to be noise from too few clean laps as a genuine gap." }
+  ],
+  "2026-06-14_Spain_Race": [
+    { "tag": "Teams", "text": "Mercedes' team-pace lead over Ferrari was its narrowest all season (0.12s), and McLaren was within 0.13s of Ferrari for 2nd — another tight three-way squeeze at the front, before a 0.39s gap back to Red Bull in 4th." },
+    { "tag": "Pace vs result", "text": "Lewis Hamilton won from the fastest individual pace of the weekend — one of only two Ferrari wins in 2026, and in both (here and Silverstone) Mercedes actually had the faster average team pace but neither Mercedes driver reached the top step." },
+    { "tag": "Tyre", "text": "Barcelona had the fastest tyre degradation of any 2026 race so far, nearly three times the season's typical rate, making tyre management the dominant factor in the result." },
+    { "tag": "Teammates", "text": "Hamilton beat Leclerc by 0.47s at Barcelona, his biggest margin over his team-mate all season, in what's otherwise been a close-to-even fight between the two all year." },
+    { "tag": "Pace vs result", "text": "Kimi Antonelli had the 2nd-quickest pace but finished 16th, and Charles Leclerc was 6th on pace but finished 15th — both were retirements late enough in the race (laps 62-63 of 66) to still be classified, not simply a case of grid position and traffic as their raw finishing order might suggest." }
+  ],
+  "2026-06-28_Austria_Race": [
+    { "tag": "Teams", "text": "Red Bull had its best team-pace showing of the season at the Red Bull Ring — 2nd fastest, just 0.13s behind Mercedes, with McLaren and Ferrari both within a further 0.15s — the closest Red Bull came to topping the team-pace table all year (its next-best was 3rd, on three other occasions)." },
+    { "tag": "Pace vs result", "text": "George Russell won again despite only the 3rd-quickest pace — team-mate Antonelli actually had the fastest lap of anyone in the field but didn't convert it into the result, a reversal of the more usual pattern where it's Russell who's off Antonelli's pace." },
+    { "tag": "Track", "text": "Running closely behind a backmarker cost nothing at the Red Bull Ring — the only race this season where the model found a net time gain rather than a penalty from lapping traffic, consistent with its short, easy-passing layout." },
+    { "tag": "Teammates", "text": "Oscar Piastri beat Lando Norris by 0.17s, his biggest margin over Norris all season — Piastri has only been ahead twice in 15 races this year, and this was the larger of the two." },
+    { "tag": "Teammates", "text": "Aston Martin and Williams also both had their tightest team-mate gaps of the season this weekend." }
+  ],
+  "2026-07-04_United_Kingdom_Sprint": [
+    { "tag": "Teams", "text": "Mercedes' team-pace lead was comfortable here (0.18s over Ferrari), with Red Bull 4th, almost a full second off — an ordinary weekend for Red Bull on raw team pace, close to its season-typical 4th-place rank." },
+    { "tag": "Pace vs result", "text": "Antonelli won from the fastest individual pace, extending Mercedes' run of results." },
+    { "tag": "Fit", "text": "The most robust pace order of the whole season — under three-hundredths of a second of spread across all eight modeling variants, the tightest agreement of any 2026 session, so this ranking can be trusted close to face value." },
+    { "tag": "Teammates", "text": "Ferrari's gap (Leclerc 0.20s clear of Hamilton) was on the wider side for them this season, while Red Bull's (0.31s) was well below Verstappen's usual half-second-plus margin over Hadjar." },
+    { "tag": "Pace vs result", "text": "Pierre Gasly finished 11th despite only the 15th-best pace, while Alexander Albon finished 18th despite being 14th on pace." }
+  ],
+  "2026-07-05_United_Kingdom_Race": [
+    { "tag": "Teams", "text": "Mercedes' team-pace lead over Ferrari was razor-thin here (0.09s), with Red Bull and McLaren separated by just 0.03s for 3rd and 4th — yet it was Ferrari's Leclerc who actually won." },
+    { "tag": "Pace vs result", "text": "Charles Leclerc won despite only the 2nd-quickest pace — the same race where Kimi Antonelli, the actual fastest driver, finished 16th, making this the clearest pace-vs-result inversion at the front of the field all season. It's also the second of Ferrari's two wins to come in a race Mercedes had the faster average team pace." },
+    { "tag": "Pace vs result", "text": "Kimi Antonelli had the outright fastest race pace of anyone at Silverstone but finished 16th, and he ran every lap — the largest pace-vs-finish gap for any classified (non-retirement) driver in the 2026 season so far." },
+    { "tag": "Pace vs result", "text": "Max Verstappen also had frontrunning pace (5th-quickest) before retiring on lap 47 of 52, just barely classified. Nico Hulkenberg's last-place result reflects his own retirement at lap 37 of 52, not a pace collapse." },
+    { "tag": "Teammates", "text": "Mercedes' own team-mate gap widened unusually here too — Antonelli's 0.38s margin over Russell was nearly triple their season norm, even as Antonelli's own race result cratered." }
+  ],
+  "2026-07-19_Belgium_Race": [
+    { "tag": "Teams", "text": "Mercedes' team-pace lead was under 0.3s over Ferrari, with Red Bull just 0.02s further back in 3rd — a normal, mid-pack-tightness front three by 2026 standards, unremarkable next to the true squeezes at Zandvoort or COTA." },
+    { "tag": "Pace vs result", "text": "Antonelli won again — his 7th win of the season — continuing Mercedes' run of results that have tracked its near-constant team-pace lead all year." },
+    { "tag": "Overtaking", "text": "Running within a second of the car ahead cost a small amount of time at Spa rather than saving it — the only race this season where that proximity effect flipped positive, suggesting position changes here came more from strategy and the pits than pure track battles." },
+    { "tag": "Track", "text": "The single most common overtaking spot at Spa was the long straight through the middle of sector 1 (past Eau Rouge, on toward Les Combes) — nearly 15% of all passes happened right there, more than anywhere else on the lap." },
+    { "tag": "Teammates", "text": "Gabriel Bortoletto beat Audi team-mate Nico Hulkenberg by half a second — a reversal of their season trend, where Hulkenberg is normally a tenth quicker, and by some margin Bortoletto's best result against him all year." },
+    { "tag": "Teammates", "text": "Red Bull's gap, by contrast, was its tightest of the season — Verstappen's smallest margin over Hadjar all year, at just 0.14s." }
+  ],
+  "2026-07-26_Hungary_Race": [
+    { "tag": "Teams", "text": "McLaren had the fastest team pace here — as it also did at both US sessions and the Canada sprint earlier in the year — with Ferrari and Mercedes both within 0.28s. Red Bull's 4th place, 0.44s back, was about its typical spot all season." },
+    { "tag": "Pace vs result", "text": "Norris converted that pace advantage into the win, the most straightforward of his three 2026 victories." },
+    { "tag": "Fit", "text": "Hungary's default model barely explained the race at all — a 'tyre tail' pattern where cars stuck in traffic showed abnormal wear — and needed a traffic-aware refit to become trustworthy; even then it's one of the more model-sensitive races of the season, a 4-place reshuffle possible depending on the exact variant." },
+    { "tag": "Tyre", "text": "Five drivers' tyre-pace figures here are extrapolated beyond the laps they actually ran on that compound, the most of any 2026 race — treat the back of the field's numbers with extra caution." },
+    { "tag": "Pace vs result", "text": "Oscar Piastri had the 3rd-quickest pace but retired at lap 56 of 70, the largest pace-vs-finish gap of the season among drivers who didn't finish." },
+    { "tag": "Teammates", "text": "Both Haas (Ocon over Bearman) and Mercedes (Antonelli over Russell) posted wider-than-usual team-mate gaps this weekend." }
+  ],
+  "2026-08-22_Netherlands_Sprint": [
+    { "tag": "Teams", "text": "Mercedes' team-pace lead was its usual comfortable self here (0.04s over Ferrari, McLaren 3rd within 0.25s) — Red Bull was 4th, its rank essentially unchanged from its season-typical spot despite Liam Lawson standing in for the injured Hadjar." },
+    { "tag": "Pace vs result", "text": "George Russell won despite only the 4th-quickest underlying pace — his fourth win of the season, and the fourth time in a row it's come without the fastest car, a case of track position and racecraft beating raw speed." },
+    { "tag": "Fit", "text": "Zandvoort's sprint showed the strongest reverse fuel effect of any 2026 session — lap times got faster, not slower, as the short race went on, the clearest version of a pattern seen in every 2026 sprint, where 20-odd laps just isn't enough fuel burn for the usual penalty to show up." },
+    { "tag": "Teammates", "text": "Ferrari (Leclerc over Hamilton) and Red Bull (Verstappen over stand-in Liam Lawson) both had wider-than-usual team-mate gaps this sprint — Red Bull's, at 1.15s, was in fact its widest of the whole season, though against a substitute rather than regular team-mate Hadjar." },
+    { "tag": "Pace vs result", "text": "Pierre Gasly finished 8th despite only the 11th-best pace, while Fernando Alonso and stand-in Liam Lawson both finished a few places worse than their pace alone predicted." }
+  ],
+  "2026-08-23_Netherlands_Race": [
+    { "tag": "Teams", "text": "Ferrari, McLaren and Mercedes were separated by just 0.094s for the top three team-pace spots at Zandvoort — the tightest three-way team-pace spread of any 2026 session — with Ferrari technically fastest. Red Bull, on Verstappen's home turf, was a distant 4th, 0.89s off." },
+    { "tag": "Pace vs result", "text": "Lando Norris won at Zandvoort despite McLaren having only the 2nd-fastest average team pace (0.08s behind Ferrari) — his own pace was the fastest in the field. Ferrari, meanwhile, led the team-pace table but didn't win, the second time that's happened this season (with Monaco)." },
+    { "tag": "Track", "text": "Zandvoort punished cars stuck behind a backmarker more than any other 2026 race, but the moment a driver actually closed to within a second of that lapped car, the model found a net time gain — the biggest such swing in either direction all year. The approach costs a lot; the pass itself pays it back." },
+    { "tag": "Teammates", "text": "Aston Martin and Alpine both posted their widest team-mate gap of the season, while Williams' Albon-Sainz gap (0.02s) and Mercedes' Antonelli-Russell gap (0.03s) were both among the closest pairings anywhere in 2026. McLaren's gap (Norris 0.49s clear of Piastri) was on the wider side for them." },
+    { "tag": "Pace vs result", "text": "Charles Leclerc had the 2nd-quickest pace but finished 5th. Esteban Ocon retired at lap 53 of 72 — short of classification — despite 14th-best pace, and Sergio Perez finished four places better than his raw pace suggested." }
+  ],
+  "2026-09-06_Italy_Race": [
+    { "tag": "Teams", "text": "Red Bull's 4th-place team pace was shadowed incredibly closely by Alpine in 5th at Monza — just 0.024s back, a midfield team within a rounding error of a top-4 team on raw pace." },
+    { "tag": "Pace vs result", "text": "Antonelli won again — his 8th win of the season, and Mercedes' 12th win in 17 races — comfortably the dominant team-pace and results story of 2026 so far." },
+    { "tag": "Pace vs result", "text": "Liam Lawson had the 9th-quickest pace at Monza but finished 14th, and Yuki Tsunoda finished three places better than his pace rank (13th) suggested. Fernando Alonso's last-place finish reflects an early retirement (lap 24 of 53), not a pace collapse — he'd shown 18th-best pace beforehand." },
+    { "tag": "Teammates", "text": "Aston Martin's gap (Alonso 0.72s clear of Stroll, before his retirement) was its widest of the season, while Williams and Cadillac's team-mates were within a tenth of each other — both teams' tightest gap all year. McLaren's and Mercedes' gaps were unusually tight too (Norris 0.15s clear of Piastri, Antonelli 0.05s clear of Russell)." },
+    { "tag": "Tyre", "text": "Lewis Hamilton's hard-tyre pace figure at Monza is extrapolated — Ferrari barely used that compound, so it's a model projection rather than a direct measurement, a pattern normally confined to the backmarkers." },
+    { "tag": "Fit", "text": "The pace order at Monza was comparatively sensitive to model choices — a three-place reshuffle and a 0.7s swing in gaps depending on how traffic is treated, on the higher end for 2026." }
+  ]
+}

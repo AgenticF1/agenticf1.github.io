@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POST TITLE — AgenticF1</title>
+<meta name="description" content="ONE-SENTENCE SUMMARY.">
+
+<!-- pre-paint theme -->
+<script>
+  try {
+    var m = localStorage.getItem("theme");
+    if (m === "light" || m === "dark") document.documentElement.setAttribute("data-theme", m);
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<!-- from /blog/ the shared assets are one level up -->
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/layout.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/blog.css">
+
+<!-- ECharts only if the post has charts; otherwise delete these two lines.
+     charts.js is NOT deferred: the per-post inline script below calls F1Charts. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.6.0/echarts.min.js"></script>
+<script src="../assets/js/charts.js"></script>
+
+<!-- KaTeX + math.js — only if the post has equations; otherwise delete these -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script src="../assets/js/math.js" defer></script>
+
+<script src="../assets/js/theme.js" defer></script>
+<script src="../assets/js/nav.js" defer></script>
+<script src="../assets/js/toc.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-title" href="../index.html">AgenticF1</a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="../index.html">Blogs</a>
+        <a href="../season-pace.html">Season pace</a>
+        <a href="../about.html">About</a>
+        <button class="btn theme-toggle" data-theme-toggle type="button" aria-label="Change theme">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="8" cy="8" r="3.2"/>
+            <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M13 3l-1.4 1.4M4.4 11.6L3 13" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container">
+      <div class="with-rail">
+
+        <aside class="with-rail__rail">
+          <nav class="toc" data-toc data-toc-source=".article" data-toc-title="On this page"></nav>
+        </aside>
+
+        <article class="article center">
+
+          <header class="article__header">
+            <p class="t-eyebrow">RACE · SESSION</p>
+            <h1 class="t-h1 article__title">Post title</h1>
+            <p class="article__dek">
+              One or two sentences that state the finding up front.
+            </p>
+            <p class="article__byline">
+              <span>2026-01-01</span><span>Agentic F1</span><span>~N min read</span>
+            </p>
+          </header>
+
+          <p>Opening paragraph. State the claim everything rests on.</p>
+
+          <div class="part">
+            <p class="part__k">Part one</p>
+            <p class="part__d">The premise</p>
+          </div>
+
+          <section>
+            <div class="section-head" id="s1" data-toc-label="Short label">
+              <p class="t-eyebrow">Section 01</p>
+              <h2 class="t-h2">First section heading</h2>
+            </div>
+
+            <p>Body text.</p>
+
+            <figure class="figure card">
+              <h3 class="t-h3">Chart title</h3>
+              <div id="c1" class="chart" style="height:280px"></div>
+              <figcaption class="figure__cap">What the reader is looking at.</figcaption>
+            </figure>
+
+            <div class="finding">
+              <p class="finding__k">The control</p>
+              <p>A tightly-scoped observation with the number that backs it.</p>
+            </div>
+
+            <p class="pull">A single sentence that carries the section.</p>
+          </section>
+
+          <section>
+            <div class="section-head" id="s2" data-toc-label="Second">
+              <p class="t-eyebrow">Section 02</p>
+              <h2 class="t-h2">Second section heading</h2>
+            </div>
+
+            <div class="table-scroll">
+              <table class="table">
+                <thead>
+                  <tr><th class="l">Driver</th><th>Run 1</th><th>Run 2</th><th>Δ</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="l">Example</td><td>1:22.070</td><td>1:22.381</td><td class="is-neg">+0.311</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <div class="method">
+            <p><b>Method.</b> Data source, model, and the caveats specific to this post.</p>
+          </div>
+
+          <nav class="post-nav">
+            <a href="../index.html">← All blogs</a>
+            <span></span>
+          </nav>
+
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>AgenticF1</span>
+      <span class="t-faint">Analysis is descriptive, not predictive. Data: OpenF1.</span>
+      <a href="../about.html">About &amp; method</a>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ==== per-post chart code — delete if the post has no charts ====
+     F1Charts.onReady(draw) runs draw() once now and again after every theme
+     change (old instances are disposed first). Keep draw() re-runnable:
+     build each chart with F1Charts.make(), and read team colours from
+     F1Charts.team("McLaren") / F1Charts.teams. All resize + theme wiring is
+     in assets/js/charts.js — nothing else belongs here. -->
+<script>
+F1Charts.onReady(function draw() {
+  var el = document.getElementById("c1");
+  if (!el) return;
+  var chart = F1Charts.make(el);
+  chart.setOption({
+    tooltip: { trigger: "axis" },
+    xAxis: { type: "category", data: ["A", "B", "C"] },
+    yAxis: { type: "value" },
+    series: [{ type: "bar", data: [12, 19, 7], barMaxWidth: 26 }]
+  });
+});
+</script>
+</body>
+</html>

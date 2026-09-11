@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Race pace breakdown — AgenticF1</title>
+<meta name="description" content="One 2026 Grand Prix: the fitted race pace of every driver, the effects the model removed to get there, and what stood out about the race.">
+
+<script>
+  try {
+    var m = localStorage.getItem("theme");
+    if (m === "light" || m === "dark") document.documentElement.setAttribute("data-theme", m);
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/blog.css">
+<link rel="stylesheet" href="assets/css/season.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.6.0/echarts.min.js"></script>
+<script src="assets/js/charts.js"></script>
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/nav.js" defer></script>
+<script src="assets/js/season-race.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-title" href="index.html">AgenticF1</a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="index.html">Blogs</a>
+        <a href="season-pace.html">Season pace</a>
+        <a href="about.html">About</a>
+        <button class="btn theme-toggle" data-theme-toggle type="button" aria-label="Change theme">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="8" cy="8" r="3.2"/>
+            <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M13 3l-1.4 1.4M4.4 11.6L3 13" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container container--narrow">
+      <article class="article flow race-page" id="race-article">
+        <p class="t-note"><a href="season-pace.html">&larr; Season pace</a></p>
+        <header class="article__header">
+          <p class="t-eyebrow" id="r-eyebrow">Race pace</p>
+          <h1 class="t-h1 article__title" id="r-title">Loading…</h1>
+        </header>
+
+        <section>
+          <div class="section-head" id="params">
+            <p class="t-eyebrow">The fit</p>
+            <h2 class="t-h2">What the model measured</h2>
+          </div>
+          <p class="season-figure__sub" id="r-params-lead"></p>
+          <dl class="coef-readout" id="r-params"></dl>
+        </section>
+
+        <section>
+          <div class="section-head" id="pace">
+            <p class="t-eyebrow">Section 01</p>
+            <h2 class="t-h2">Fitted pace</h2>
+          </div>
+          <p class="season-figure__sub" id="r-pace-sub"></p>
+          <div id="c_pace" class="season-chart"></div>
+        </section>
+
+        <section>
+          <div class="section-head" id="spread">
+            <p class="t-eyebrow">Section 02</p>
+            <h2 class="t-h2">Fitted race pace distribution</h2>
+          </div>
+          <p class="season-figure__sub">
+            The same fitting can be run several ways — treating traffic, tyre wear and the
+            reference field a little differently each time. The bar is the full range a
+            driver's fitted lap time moves across those runs; the dot is the version shown
+            above. A short bar means the answer is settled; a long one means their pace
+            depends on how you account for traffic.
+          </p>
+          <div id="c_variants" class="season-chart"></div>
+        </section>
+
+        <section id="insights-section" hidden>
+          <div class="section-head" id="insights">
+            <p class="t-eyebrow">Section 03</p>
+            <h2 class="t-h2">What stood out</h2>
+          </div>
+          <ul class="insight-list" id="r-insights"></ul>
+        </section>
+
+        <section>
+          <div class="section-head" id="effects">
+            <p class="t-eyebrow">Section 04</p>
+            <h2 class="t-h2">How each effect was fitted</h2>
+          </div>
+          <p class="season-figure__sub">
+            Every lap is heavier on fuel, older on tyres or closer to another car than the
+            reference lap the pace figure is quoted at. Each panel strips out everything
+            except one of those effects and shows what is left: the cloud is the leftover
+            lap time, the line is the fitted effect the model removes, and the figure at
+            the top of each panel is how big that effect was. The overtake-mode panel is
+            a before/after instead — the spread of leftover lap time with a car more than a
+            second up the road versus within a second of it, the black bar marking each
+            average.
+          </p>
+          <div class="explain-grid" id="r-explain"></div>
+        </section>
+
+        <div class="cta-row">
+          <a class="cta cta--primary" id="r-whatif" href="pace-whatif.html">Adjust the assumptions yourself &rarr;</a>
+          <a class="cta" href="season-pace.html">Back to all races</a>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>AgenticF1</span>
+      <span class="t-faint">Analysis is descriptive, not predictive. Data: OpenF1.</span>
+      <a href="about.html">About &amp; method</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

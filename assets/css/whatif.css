@@ -1,0 +1,260 @@
+/* ==========================================================================
+   whatif.css  —  the clean-air pace what-if explorer (pace-whatif.html) only.
+   Ported from pace_model/whatif_template.html onto the shared design tokens.
+   ========================================================================== */
+
+.whatif { max-width: var(--page-max); margin-inline: auto; }
+
+.whatif__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  margin-bottom: var(--space-5);
+}
+.whatif__toolbar select {
+  font: inherit;
+  font-size: var(--step-0);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-s);
+  padding: var(--space-2) var(--space-3);
+}
+.whatif__meta { font-size: var(--step--1); color: var(--ink-faint); }
+
+.whatif__layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+@media (max-width: 52rem) { .whatif__layout { grid-template-columns: 1fr; } }
+
+.whatif__panel {
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  padding: var(--space-4);
+}
+:root:not([data-theme="light"]) .whatif__panel,
+:root[data-theme="dark"] .whatif__panel { background: var(--surface-2); }
+
+/* The results panel (derived pace + ranking) is much shorter than the
+   sliders panel — pin it in place as the page scrolls through the longer
+   controls panel, instead of both scrolling together and the ranking
+   disappearing off-screen while you work down the sliders. */
+@media (min-width: 52.01rem) {
+  .whatif__panel--results { position: sticky; top: var(--space-4); }
+}
+
+.whatif__panel > h2 {
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  margin: 0 0 var(--space-1);
+}
+.whatif__hint { font-size: var(--step--1); color: var(--ink-muted); margin: 0 0 var(--space-3); }
+
+.whatif .grp { margin-bottom: var(--space-4); }
+.whatif .grp > .grp__head {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.whatif .grp h3 {
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 2px;
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.whatif .grp__head .link { flex: 0 0 auto; }
+.whatif .note { font-size: var(--step--1); color: var(--ink-muted); margin: 2px 0 var(--space-2); }
+
+.whatif button.link {
+  display: inline-block;
+  border: 0;
+  background: var(--surface-2);
+  color: var(--ink-muted);
+  padding: 0 4px;
+  border-radius: var(--radius-s);
+  font-family: inherit;
+  font-size: 0.625rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.whatif button.link:hover { background: var(--line-strong); color: var(--ink); }
+
+.whatif .ctl { margin: var(--space-3) 0; }
+.whatif .ctl .row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.whatif .ctl label {
+  font-size: var(--step--1);
+  color: var(--ink);
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.whatif .ctl .row > span {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-1);
+}
+.whatif .ctl .val {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--accent-ink);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.whatif .ctl .delta { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.whatif .ctl .endlabels {
+  display: flex; justify-content: space-between; margin-top: 3px;
+  font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-faint);
+}
+
+/* Custom thin track + round thumb — the .ci/.base overlay markers below are
+   positioned in pixels assuming this exact track height/position, so the
+   native (unstyled) range input's much taller default box would leave them
+   floating above/overlapping it instead of sitting on the track. */
+/* The thumb (part of the <input>'s own rendering) needs z-index above the
+   .ci/.base overlays, but its track background is part of that same element
+   — so lifting the whole input also lifted its opaque track background
+   above .ci, hiding the band completely. Splitting the grey track out into
+   its own .track-bg element fixes the real stacking order: track (behind),
+   .ci band, then the input (transparent track + opaque thumb, in front). */
+.whatif input[type="range"] {
+  width: 100%; margin: 0; accent-color: var(--accent); background: transparent;
+  height: 3px; border-radius: 2px; appearance: none;
+}
+.whatif input[type="range"]::-webkit-slider-thumb {
+  appearance: none; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--surface);
+  cursor: pointer; margin-top: -5.5px;
+}
+.whatif input[type="range"]::-webkit-slider-runnable-track { height: 3px; background: transparent; }
+.whatif input[type="range"]::-moz-range-thumb {
+  width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface);
+  cursor: pointer;
+}
+/* Flex-center the input instead of computing its y from padding+margin —
+   .track-bg/.ci/.base then center on the same axis via translateY, so they
+   land on the track exactly regardless of box-model edge cases. */
+.whatif .sliderwrap { position: relative; height: 20px; display: flex; align-items: center; margin-top: var(--space-2); }
+.whatif .sliderwrap input[type="range"] { position: relative; z-index: 1; width: 100%; }
+.whatif .sliderwrap .track-bg {
+  position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%);
+  height: 4px; background: var(--line-strong); border-radius: 2px; pointer-events: none;
+  box-shadow: inset 0 1px 1.5px rgba(0, 0, 0, 0.08);
+}
+.whatif .sliderwrap .ci {
+  position: absolute; top: 50%; transform: translateY(-50%); height: 5px;
+  background: var(--ink-faint); border-radius: 2px; pointer-events: none;
+}
+.whatif .sliderwrap .base {
+  position: absolute; top: 50%; transform: translateY(-50%); width: 2px; height: 16px;
+  background: var(--ink-faint); pointer-events: none;
+}
+
+.whatif .curve { width: 100%; height: 150px; display: block; margin-top: var(--space-2); }
+.whatif .legend {
+  display: flex; flex-wrap: nowrap; align-items: center; overflow-x: auto; gap: var(--space-2);
+  font-size: 0.6875rem; color: var(--ink-muted); margin-top: var(--space-2);
+}
+.whatif .legend span { flex: 0 0 auto; }
+.whatif .legend i { display: inline-block; width: 10px; height: 3px; vertical-align: middle; margin-right: 3px; }
+
+/* Compound base offset: one shared axis, all compounds to scale against
+   each other rather than each its own 0-anchored slider. */
+.whatif .axis { display: grid; grid-template-columns: 4.4rem 1fr auto; align-items: center; gap: var(--space-2) var(--space-3); margin-top: var(--space-3); }
+.whatif .axis__label { font-size: var(--step--1); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.whatif .axis__track { position: relative; height: 20px; display: flex; align-items: center; }
+.whatif .axis__track input[type="range"] { position: relative; z-index: 1; width: 100%; margin: 0; }
+.whatif .axis__track .track-bg {
+  position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%);
+  height: 4px; background: var(--line-strong); border-radius: 2px; pointer-events: none;
+  box-shadow: inset 0 1px 1.5px rgba(0, 0, 0, 0.08);
+}
+.whatif .axis__track .zero { position: absolute; top: 1px; bottom: 1px; width: 1px; background: var(--line-strong); pointer-events: none; }
+.whatif .axis__track .ci { position: absolute; top: 50%; transform: translateY(-50%); height: 5px; background: var(--ink-faint); border-radius: 2px; pointer-events: none; }
+.whatif .axis__track .base { position: absolute; top: 50%; transform: translateY(-50%); width: 2px; height: 16px; background: var(--ink-faint); pointer-events: none; }
+.whatif .axis__ref .dot { position: absolute; top: 50%; width: 9px; height: 9px; margin-top: -4.5px; margin-left: -4.5px; border-radius: 50%; background: var(--ink-faint); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--ink-faint); }
+.whatif .axis__val { font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent-ink); font-weight: 500; text-align: right; white-space: nowrap; line-height: 1.3; font-variant-numeric: tabular-nums; }
+.whatif .axis__val .delta { display: block; font-size: 0.6875rem; color: var(--ink-faint); font-weight: 400; }
+.whatif .axis__val.muted { color: var(--ink-muted); font-weight: 400; }
+
+/* Tyre degradation: one row per compound, linear (left) / curvature (right)
+   sharing that row, with the base-offset axis as the row's first line. */
+.whatif .tyre-row { margin: var(--space-4) 0; padding-top: var(--space-3); border-top: 1px solid var(--line); }
+.whatif .tyre-row:first-of-type { margin-top: var(--space-2); padding-top: 0; border-top: 0; }
+.whatif .tyre-row__head {
+  display: flex; align-items: center; gap: 6px;
+  font-size: var(--step--1); font-weight: 600; color: var(--ink); margin-bottom: var(--space-2);
+}
+.whatif .tyre-row__head i { width: 9px; height: 9px; border-radius: 2px; flex: 0 0 auto; }
+.whatif .tyre-row__head .chip { margin-left: auto; }
+.whatif .tyre-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-3); }
+.whatif .tyre-col label {
+  display: block; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--ink-faint); margin-bottom: var(--space-1);
+}
+.whatif .tyre-col__val {
+  margin-top: var(--space-1); font-family: var(--font-mono); font-size: var(--step--1);
+  color: var(--accent-ink); font-weight: 500; font-variant-numeric: tabular-nums;
+  display: flex; align-items: baseline; gap: var(--space-1); white-space: nowrap;
+}
+.whatif .tyre-col__val .delta { font-size: 0.6875rem; color: var(--ink-faint); font-weight: 400; }
+
+/* table-layout: fixed + an explicit width on every column except Driver
+   (which absorbs whatever's left) — column widths are then set once from
+   the table's own width, not recomputed from current cell content, so
+   toggling lap-time/delta-lead text never reflows the columns. Widths are
+   in rem, not em — em on a th resolves against that cell's own (smaller)
+   header font-size, not the body row's, and fixed layout takes column
+   widths from the header row, so em came out far too narrow. */
+.whatif table { width: 100%; border-collapse: collapse; table-layout: fixed; font-variant-numeric: tabular-nums; }
+.whatif th, .whatif td {
+  text-align: right; padding: var(--space-1) var(--space-2); border-bottom: 1px solid var(--line);
+  font-size: var(--step--1); overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+.whatif th:first-child, .whatif td:first-child,
+.whatif th:nth-child(2), .whatif td:nth-child(2) { text-align: left; }
+.whatif th:nth-child(1), .whatif td:nth-child(1) { width: 2.75rem; }
+.whatif th:nth-child(2), .whatif td:nth-child(2) { overflow: visible; white-space: normal; }
+.whatif th:nth-child(3), .whatif td:nth-child(3) { width: 6rem; }
+.whatif th:nth-child(5), .whatif td:nth-child(5) { width: 4.75rem; }
+.whatif th:nth-child(6), .whatif td:nth-child(6) { width: 3.25rem; }
+.whatif #wi-col-toggle {
+  cursor: pointer; user-select: none;
+  text-decoration: underline dotted var(--ink-muted); text-underline-offset: 3px;
+}
+.whatif #wi-col-toggle:hover { color: var(--accent-ink); }
+.whatif .barcell { width: 22%; }
+.whatif .barbox {
+  background: var(--surface-2); border-radius: 3px; height: 13px;
+  position: relative; overflow: hidden;
+}
+.whatif .bar { height: 100%; border-radius: 3px; }
+.whatif .mv-up { color: var(--pos); }
+.whatif .mv-down { color: var(--neg); }
+.whatif .chip {
+  display: inline-block; font-size: 0.625rem; padding: 0 4px;
+  border-radius: var(--radius-s); background: var(--surface-2); color: var(--ink-muted); margin-left: 5px;
+}
+.whatif .movers { font-size: var(--step--1); color: var(--ink-muted); margin: 2px 0 var(--space-3); }
