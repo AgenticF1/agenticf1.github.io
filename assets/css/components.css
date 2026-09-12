@@ -167,6 +167,23 @@
   color: var(--ink-muted);
 }
 
+/* --- ECharts split into a frozen axis pane + scrollable body pane ------
+   (see F1Charts.splitScroll) — for wide category-axis charts (many
+   races/columns) that would otherwise squeeze illegibly on a narrow
+   viewport. Names/y-axis stay put in .f1-scroll-chart__axis; only the
+   body scrolls horizontally. */
+.f1-scroll-chart { display: flex; width: 100%; height: 100%; }
+.f1-scroll-chart__axis { flex: none; height: 100%; }
+.f1-scroll-chart__scroll {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.f1-scroll-chart__body { width: 100%; height: 100%; }
+
 /* --- data table ---------------------------------------------------- */
 .table-scroll { overflow-x: auto; }
 .table {

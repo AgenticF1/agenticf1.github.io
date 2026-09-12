@@ -182,6 +182,41 @@
 
   function connect(group) { if (window.echarts) echarts.connect(group); }
 
+  /* --- a chart split into a frozen left axis pane + a horizontally
+     scrollable body pane — for wide category-axis charts (many races)
+     that would otherwise squeeze illegibly on a narrow viewport. The
+     two are separate ECharts instances; keep their rows lined up by
+     giving both the SAME pixel (not percent) grid.top/bottom and the
+     same category/value axis domain when you set their options.       */
+  function splitScroll(container, opts) {
+    if (!container) return null;
+    opts = opts || {};
+    var axisWrap = container.querySelector(".f1-scroll-chart__axis");
+    var scrollWrap, bodyEl;
+    if (!axisWrap) {
+      container.classList.add("f1-scroll-chart");
+      axisWrap = document.createElement("div");
+      axisWrap.className = "f1-scroll-chart__axis";
+      scrollWrap = document.createElement("div");
+      scrollWrap.className = "f1-scroll-chart__scroll";
+      bodyEl = document.createElement("div");
+      bodyEl.className = "f1-scroll-chart__body";
+      scrollWrap.appendChild(bodyEl);
+      container.appendChild(axisWrap);
+      container.appendChild(scrollWrap);
+    } else {
+      scrollWrap = container.querySelector(".f1-scroll-chart__scroll");
+      bodyEl = scrollWrap.querySelector(".f1-scroll-chart__body");
+    }
+    axisWrap.style.width = (opts.axisWidth || 96) + "px";
+    var axis = (window.echarts && echarts.getInstanceByDom(axisWrap)) || make(axisWrap);
+    var body = (window.echarts && echarts.getInstanceByDom(bodyEl)) || make(bodyEl);
+    return {
+      axis: axis, body: body,
+      setBodyMinWidth: function (px) { bodyEl.style.minWidth = px + "px"; }
+    };
+  }
+
   function disposeAll() {
     registry.forEach(function (c) { if (c && !(c.isDisposed && c.isDisposed())) c.dispose(); });
     registry.length = 0;
@@ -267,7 +302,7 @@
   window.F1Charts = {
     tokens: tokens, teams: TEAMS, team: team, palette: palette,
     lighten: lighten, darken: darken, mix: mix, driverColors: driverColors,
-    base: base, zoom: zoom, make: make, connect: connect,
+    base: base, zoom: zoom, make: make, connect: connect, splitScroll: splitScroll,
     onReady: onReady, resizeAll: resizeAll, svgZoom: svgZoom
   };
 })();

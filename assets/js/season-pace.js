@@ -26,8 +26,8 @@
   function pctFmt(v) { return v == null ? "–" : v.toFixed(2) + "%"; }
 
   // shared geometry so the driver heatmap and the team chart line their race
-  // columns up exactly.
-  var GRID_LEFT = 134, GRID_RIGHT = 78;
+  // columns up exactly, and so their columns scroll at the same width.
+  var COL_W = 34;
   function raceCats() {
     return DATA.races.map(function (r) { return r.short || r.name; }).concat(["", "Season"]);
   }
@@ -50,13 +50,16 @@
     if (!el || !DATA) return;
     var t = F1Charts.tokens();
     var dark = isDark(t.bg);
-    var c = F1Charts.make(el);
+    // driver names stay in a frozen left pane; the race columns scroll
+    // horizontally in their own pane — see F1Charts.splitScroll.
+    var split = F1Charts.splitScroll(el, { axisWidth: 118 });
 
     var drivers = DATA.drivers;               // already sorted fastest-first
     var names = drivers.map(function (d) { return d.name; });
     var cats = raceCats();
     var seasonCol = cats.length - 1;
     var key = metric === "pct" ? "pct" : "s";
+    var gridTop = 6, gridBottom = 74, rightPad = 84;
 
     var data = [], vmax = 0.001;
     drivers.forEach(function (d, yi) {
@@ -70,8 +73,22 @@
       if (sv != null) { data.push([seasonCol, yi, sv]); vmax = Math.max(vmax, sv); }
     });
 
-    c.setOption({
-      grid: { left: GRID_LEFT, right: GRID_RIGHT, top: 6, bottom: 74, containLabel: false },
+    // frozen pane: names only, same grid.top/bottom (in px) as the
+    // scrollable body below so the rows line up exactly.
+    split.axis.setOption({
+      grid: { left: 108, right: 0, top: gridTop, bottom: gridBottom, containLabel: false },
+      xAxis: { type: "category", data: [""], show: false },
+      yAxis: {
+        type: "category", data: names, inverse: true,
+        axisTick: { show: false }, axisLine: { show: false }, splitArea: { show: false },
+        axisLabel: { fontSize: 10, color: t.muted }
+      },
+      series: []
+    }, true);
+
+    split.setBodyMinWidth(cats.length * COL_W + rightPad);
+    split.body.setOption({
+      grid: { left: 4, right: rightPad, top: gridTop, bottom: gridBottom, containLabel: false },
       xAxis: {
         type: "category", data: cats, boundaryGap: true,
         axisTick: { show: false }, axisLine: { show: false }, splitArea: { show: false },
@@ -81,7 +98,7 @@
       yAxis: {
         type: "category", data: names, inverse: true,
         axisTick: { show: false }, axisLine: { show: false }, splitArea: { show: false },
-        axisLabel: { fontSize: 10 }
+        axisLabel: { show: false }
       },
       visualMap: {
         min: 0, max: Math.ceil(vmax * 10) / 10, calculable: true,
@@ -125,24 +142,43 @@
   }
 
   /* ---------- team pace evolution ---------- */
+  // team-name legend lives outside the chart, in plain HTML — it doesn't
+  // need to scroll with the race columns, and keeping it out of the
+  // ECharts option means the frozen axis pane and the scrollable body
+  // pane don't have to agree on where a two-row legend would sit.
+  function drawTeamLegend(teams) {
+    var host = document.getElementById("team-legend");
+    if (!host) return;
+    host.innerHTML = teams.map(function (tm) {
+      return '<span><span class="swatch" style="background:' + F1Charts.team(tm.team) +
+        '"></span>' + tm.team + "</span>";
+    }).join("");
+  }
+
   function drawTeams() {
     var el = document.getElementById("c_teams");
     if (!el || !DATA) return;
     var t = F1Charts.tokens();
-    var c = F1Charts.make(el);
+    // value axis stays in a frozen left pane; the race columns scroll
+    // horizontally in their own pane — see F1Charts.splitScroll.
+    var split = F1Charts.splitScroll(el, { axisWidth: 56 });
     var cats = raceCats();
     var teams = DATA.teams;                   // sorted fastest-first
     var key = metric === "pct" ? "pct" : "s";
+    var gridTop = 8, gridBottom = 74, rightPad = 16;
 
-    var series = [], missed = [];
+    var series = [], missed = [], vmax = 0.001;
     teams.forEach(function (tm) {
       var vals = DATA.races.map(function (r) {
         var g = tm.gaps[r.race_id];
-        return (g && g[key] != null) ? g[key] : null;
+        var v = (g && g[key] != null) ? g[key] : null;
+        if (v != null) vmax = Math.max(vmax, v);
+        return v;
       });
       // spacer (null), then the season average as an isolated point in the
       // "Season" column — connectNulls:false keeps it off the line
       var sv = metric === "pct" ? tm.season_pct : tm.season_gap;
+      if (sv != null) vmax = Math.max(vmax, sv);
       series.push({
         name: tm.team, type: "line", connectNulls: false,
         showSymbol: true, symbolSize: 5,
@@ -179,18 +215,24 @@
       });
     }
 
-    c.setOption({
-      grid: { left: GRID_LEFT, right: GRID_RIGHT, top: 8, bottom: 120, containLabel: false },
-      legend: (function () {
-        var nm = teams.map(function (x) { return x.team; });
-        var half = Math.ceil(nm.length / 2);
-        var common = { type: "plain", left: "center", itemGap: 14, itemWidth: 18, itemHeight: 8,
-          textStyle: { fontSize: 10, color: t.ink } };
-        return [
-          Object.assign({ bottom: 22, data: nm.slice(0, half) }, common),
-          Object.assign({ bottom: 4, data: nm.slice(half) }, common)
-        ];
-      })(),
+    // both panes get the same explicit y-axis domain (rather than each
+    // auto-scaling to its own data — the axis pane has none) so their
+    // gridlines/ticks land on the same rows.
+    var yMax = Math.ceil(vmax * 1.05 * 10) / 10;
+
+    split.axis.setOption({
+      grid: { left: 32, right: 4, top: gridTop, bottom: gridBottom, containLabel: false },
+      xAxis: { type: "category", data: [""], show: false },
+      yAxis: {
+        type: "value", min: 0, max: yMax,
+        axisLabel: { fontSize: 10, color: t.muted, formatter: metric === "pct" ? "{value}%" : "{value}" }
+      },
+      series: []
+    }, true);
+
+    split.setBodyMinWidth(cats.length * COL_W + rightPad);
+    split.body.setOption({
+      grid: { left: 4, right: rightPad, top: gridTop, bottom: gridBottom, containLabel: false },
       tooltip: {
         trigger: "axis", order: "valueAsc",
         valueFormatter: function (v) { return v == null ? "–" : (metric === "pct" ? v.toFixed(2) + "%" : fmt(v) + " s"); }
@@ -202,14 +244,13 @@
           color: function (v) { return v === "Season" ? t.faint : t.muted; } }
       },
       yAxis: {
-        type: "value", min: 0,
-        name: metric === "pct" ? "% off fastest team" : "s off fastest team",
-        nameLocation: "end", nameGap: 10,
-        nameTextStyle: { align: "left", color: t.faint, fontSize: 10 },
-        axisLabel: { fontSize: 10, formatter: metric === "pct" ? "{value}%" : "{value}" }
+        type: "value", min: 0, max: yMax,
+        axisLine: { show: false }, axisLabel: { show: false }
       },
       series: series
     }, true);
+
+    drawTeamLegend(teams);
   }
 
   /* ---------- per-race list ---------- */
