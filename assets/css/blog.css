@@ -34,6 +34,9 @@
 .part + .section-head { margin-top: var(--space-4); padding-top: 0; border-top: 0; }
 /* the deck paragraph that follows a section-head */
 .section-head + .t-deck { margin-bottom: var(--space-5); }
+/* a part with no section-head under it: give its own body copy the same
+   breathing room a section-head's margin-bottom would have provided */
+.part + :is(p, ul, ol, .table-scroll, .card, .pull, .quote, .finding, figure) { margin-top: var(--space-4); }
 
 /* a heavier divider for top-level "parts" — sits a step above a section-head */
 .part {
@@ -64,6 +67,12 @@
 /* --- body copy inside an article --- */
 .article p { margin-block: 0; }
 .article :is(p, ul, ol, .card, .pull, .quote, .finding, figure) + :is(p, ul, ol, .card, .pull, .quote, .finding, figure) {
+  margin-top: var(--space-4);
+}
+/* a table (not itself in the prose-spacing set above, since it isn't prose)
+   still needs the same rhythm on both sides when it sits between paragraphs */
+.article :is(p, ul, ol, .card, .pull, .quote, .finding, figure) + .table-scroll,
+.article .table-scroll + :is(p, ul, ol, .card, .pull, .quote, .finding, figure) {
   margin-top: var(--space-4);
 }
 .article ul, .article ol { padding-left: 1.25rem; }

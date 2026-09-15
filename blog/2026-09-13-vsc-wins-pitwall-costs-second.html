@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VSC Costs Norris The Win, Pitwall Costs Him Second &mdash; AgenticF1</title>
+<meta name="description" content="Norris led Madrid by 14 seconds, missed the free pit stop under a Virtual Safety Car by one lap, and paid close to the full green-flag price for a stop that should have been nearly free.">
+
+<script>
+  try {
+    var m = localStorage.getItem("theme");
+    if (m === "light" || m === "dark") document.documentElement.setAttribute("data-theme", m);
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/layout.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/blog.css">
+
+<script src="../assets/js/theme.js" defer></script>
+<script src="../assets/js/nav.js" defer></script>
+<script src="../assets/js/toc.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-title" href="../index.html">AgenticF1</a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="../index.html">Blogs</a>
+        <a href="../season-pace.html">Season pace</a>
+        <a href="../about.html">About</a>
+        <button class="btn theme-toggle" data-theme-toggle type="button" aria-label="Change theme">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="8" cy="8" r="3.2"/>
+            <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M13 3l-1.4 1.4M4.4 11.6L3 13" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container">
+      <div class="with-rail">
+
+        <aside class="with-rail__rail">
+          <nav class="toc" data-toc data-toc-source=".article" data-toc-title="On this page"></nav>
+        </aside>
+
+        <article class="article center">
+
+<header class="article__header">
+  <p class="t-eyebrow">Madrid &middot; 2026 Spanish Grand Prix &middot; Race</p>
+  <h1 class="t-h1 article__title">VSC costs Norris the win, Pitwall costs Norris the second</h1>
+  <p class="article__dek">Lando Norris comfortably leads the race by over 6&nbsp;seconds. The VSC
+  comes out right after he has driven past the pit lane entry, and he misses the free stop under
+  a Virtual Safety Car by a few seconds, paying close to the full price for a stop that should
+  have been nearly free. We pulled the pace model and the race&rsquo;s own spatial timing data to
+  separate what the VSC forced on him from what his own pit crew cost him, and to check whether a
+  cleaner stop, or simply staying out two laps longer, would have been enough to come out of the
+  pits still ahead of Max Verstappen.</p>
+  <p class="article__byline"><span>2026-09-13</span><span>AgenticF1</span></p>
+</header>
+
+<div class="part" id="p1" data-toc-label="Part one &middot; What happened">
+  <p class="part__k">Part one</p>
+  <p class="part__d">A pole, a lead, and a Virtual Safety Car</p>
+</div>
+
+<div class="section-head" id="s1" data-toc-label="The pole">
+  <p class="t-eyebrow">Section 01</p>
+  <h2 class="t-h2">The pole</h2>
+</div>
+<p>Norris took pole the day before, and it was close: 91.824&nbsp;s against Antonelli&rsquo;s
+91.835&nbsp;s, eleven thousandths of a second, with Verstappen a tenth and a half further back
+in third. Leclerc qualified fifth, half a second off pole.</p>
+<p>Pole put him at the front, and he kept it. Norris had a clean start and led into Turn&nbsp;1.
+The position feed briefly credits Antonelli with the lead twice in the first forty seconds, but
+neither is a real pass: Antonelli cuts the chicane at the start, then cuts again through
+Turns&nbsp;5 and 6, gaining track position off the racing line rather than on it. Verstappen is
+the one who gets past Antonelli for real, taking second off him once the field settles.</p>
+
+<div class="section-head" id="s2" data-toc-label="The lead">
+  <p class="t-eyebrow">Section 02</p>
+  <h2 class="t-h2">The lead</h2>
+</div>
+<p>From there the gap built the ordinary way, half a second to a second and a half a lap for
+most of the first stint. By lap&nbsp;13, the last clean lap before anything happened, he led
+Leclerc by 14.0&nbsp;s, Antonelli by 6.4&nbsp;s and Verstappen by 12.2&nbsp;s.</p>
+<div class="finding">
+  <b>Pace, start to finish</b>
+  <p>Our pace-model fit puts Norris roughly 0.5&ndash;0.6&nbsp;s a lap faster than all three
+  across the race. None of the fourteen seconds needed a fight for the lead: he had it from the
+  green light, and the gap from there is a full stint of a car that is simply quicker.</p>
+</div>
+
+<div class="section-head" id="s3" data-toc-label="The Virtual Safety Car">
+  <p class="t-eyebrow">Section 03</p>
+  <h2 class="t-h2">The Virtual Safety Car</h2>
+</div>
+<p>A local yellow came out first, in track sectors 22 and 23 at 13:26:41. Race control upgraded
+it to a Virtual Safety Car 37&nbsp;seconds later, at 13:27:18. The VSC itself ran a little over
+two minutes before ending at 13:29:21. Leclerc stayed out through all of it. Antonelli and
+Verstappen both ducked into the pits while it ran.</p>
+<p>A pit stop under a Virtual Safety Car is close to free: the whole field is capped to the same
+slow pace, so a car in the pits is not losing ground to cars still racing at full speed. The
+official gain was about 11&nbsp;seconds, against the roughly 26&nbsp;seconds the same stop costs
+under green flag. Measured against Leclerc, who took none of that gain, Antonelli and Verstappen
+each gave up only about 9&nbsp;seconds, close to the official figure.</p>
+<p>Norris never had the choice. By 13:27:18 he had already driven past the pit entry for that
+lap; the next time he reached it, at 13:29:21, the VSC had already ended. He pitted lap&nbsp;15
+into a green flag because the message arrived a lap too late, not because McLaren chose to leave
+him out.</p>
+<div class="finding">
+  <b>One lap decided the discount</b>
+  <p>A lap earlier and Norris is in the same cheap window as Antonelli and Verstappen. Instead
+  he is the only one of the three who pits into a green flag, and the timing of a VSC, not a
+  strategy call, is why: one lap decided who got the discount and who paid full price.</p>
+</div>
+
+<div class="section-head" id="s4" data-toc-label="Where it stood when the VSC ended">
+  <p class="t-eyebrow">Section 04</p>
+  <h2 class="t-h2">Where it stood when the VSC ended</h2>
+</div>
+<p>By the moment the VSC ended, Norris was 20.0&nbsp;s clear of Leclerc, about 21&nbsp;s clear
+of Antonelli, and about 26&nbsp;s clear of Verstappen, with Antonelli and Verstappen having
+already banked their cheap stops and Leclerc still to make his own move.</p>
+
+<div class="part" id="p2" data-toc-label="Part two &middot; The fallout">
+  <p class="part__k">Part two</p>
+  <p class="part__d">The fallout</p>
+</div>
+<p>Two things stacked against him at once. He paid the full green-flag price for his stop
+instead of the roughly 11-second VSC discount Antonelli and Verstappen got, and the stop itself
+ran slower than a normal green-flag stop on top of that. Either one alone costs track position;
+together they turned a 26-second lead into fifth place.</p>
+<div class="table-scroll">
+  <table class="table">
+    <thead>
+      <tr><th class="l">Lap</th><th>Norris &rarr; Leclerc</th><th>Norris &rarr; Antonelli</th><th>Norris &rarr; Verstappen</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="l">13 (pre-VSC)</td><td class="is-pos">&minus;14.0&nbsp;s (ahead)</td><td class="is-pos">&minus;6.4&nbsp;s (ahead)</td><td class="is-pos">&minus;12.2&nbsp;s (ahead)</td></tr>
+      <tr><td class="l">17 (post-stop)</td><td class="is-neg">+17.2&nbsp;s (behind)</td><td class="is-neg">+15.5&nbsp;s (behind)</td><td class="is-neg">+8.8&nbsp;s (behind)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The official position feed confirms it plainly: Leclerc P1, Antonelli P2, Verstappen P3,
+Norris P5, the moment Norris commits to the pit lane. He comes out of the pits 6.0&nbsp;s behind
+Verstappen and just 0.7&nbsp;s behind Russell, who becomes his new neighbor on track for the
+laps it takes to fight back through.</p>
+<p class="pull">A 26-second lead over Verstappen turned into fifth place inside two laps.</p>
+
+<div class="part" id="p3" data-toc-label="Part three &middot; Would a clean stop have kept him ahead of Max?">
+  <p class="part__k">Part three</p>
+  <p class="part__d">Would a clean stop have kept him ahead of Max?</p>
+</div>
+<p>Norris came out of the pits 6.0&nbsp;seconds behind Verstappen. Take out the slow part of the
+stop and see where that leaves him.</p>
+<div class="table-scroll">
+  <table class="table fixed">
+    <thead>
+      <tr><th class="l">Slow-stop estimate</th><th class="l">Projected gap to Max on a normal stop</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="l">Pit-lane transit only (&asymp;4&nbsp;s)</td><td class="l">2.3&nbsp;s behind</td></tr>
+      <tr><td class="l">Full out-lap cost (&asymp;5.5&nbsp;s)</td><td class="l">0.5&nbsp;s behind, close enough to call it level</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="finding">
+  <b>A real chance, not a guaranteed pass</b>
+  <p>The two honest readings of &ldquo;how slow was the stop&rdquo; put a clean exit anywhere from
+  just behind Verstappen to just ahead of him: a chance of coming out in front, not a certainty
+  either way. More importantly, a clean stop puts Norris back into the fight laps earlier than
+  the real one did, with way more laps of racing left to find a way past rather than a whole queue to clear
+  from fifth. Not a clear win. A real chance at one, and more time on track to take it.</p>
+</div>
+<p class="pull">A clean stop would not have guaranteed the place back. It would have put Norris back in the fight, laps earlier, with room left to go and take it.</p>
+
+<div class="part" id="p4" data-toc-label="Part four &middot; Can McLaren be smarter?">
+  <p class="part__k">Part four</p>
+  <p class="part__d">Can McLaren be smarter?</p>
+</div>
+<p>There was a second way to play it. Norris had been managing his tyre before the VSC, lapping
+at 99.2&ndash;99.4&nbsp;s. It was the pace of a driver protecting a tyre with a comfortable lead.
+Let him push for two more laps instead of pitting on lap&nbsp;15, and 99.3&nbsp;s a lap is a
+reasonable ask. The VSC itself may even have let the tyre cool a little on the way into it.</p>
+<p>Here is what those two laps buy him, built entirely from real, measured gaps:</p>
+<div class="table-scroll">
+  <table class="table fixed">
+    <thead>
+      <tr><th class="l">Step</th><th class="l">Value</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="l">Norris &rarr; Leclerc, the instant the VSC ends</td><td class="l">20.0&nbsp;s ahead</td></tr>
+      <tr><td class="l">Leclerc&rsquo;s real pace over the next two laps</td><td class="l">~98.6&ndash;98.7&nbsp;s</td></tr>
+      <tr><td class="l">Norris at 99.3&nbsp;s loses to that pace, over 2 laps</td><td class="l">1.2&ndash;1.4&nbsp;s</td></tr>
+      <tr><td class="l">Norris &rarr; Leclerc, two laps later</td><td class="l">~18.7&nbsp;s ahead</td></tr>
+      <tr><td class="l">Verstappen &rarr; Leclerc, real and flat across this window</td><td class="l">~8.2&nbsp;s behind</td></tr>
+      <tr class="em"><td class="l"><b>Norris &rarr; Verstappen, projected</b></td><td class="l"><b>~27&nbsp;s ahead</b></td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Twenty-seven seconds is enough to cover a clean stop and still come out ahead. Piastri&rsquo;s
+actual mid-race stop, the number McLaren already showed it can produce, cost 26.4&nbsp;seconds.</p>
+<div class="finding">
+  <b>Room to spare, not just a chance</b>
+  <p>Staying out two laps longer, on pure pace already on the table, projects to a bigger and
+  cleaner margin over Verstappen than fixing the stop alone. Where scenario one gives Norris a
+  chance at the place, this one lands with room to spare, built from real lap times the team
+  already had in hand before the VSC was ever called.</p>
+</div>
+<p class="pull">Two laps of pace he was already capable of would have covered the pit stop with room left over.</p>
+
+<div class="part" id="p5" data-toc-label="Part five &middot; What decided the race">
+  <p class="part__k">Part five</p>
+  <p class="part__d">What decided the race</p>
+</div>
+<p>The Virtual Safety Car decided this fight. That part was out of McLaren&rsquo;s hands,
+missing the cheap window by one lap. What happened after was not.</p>
+<ul>
+  <li>A normal stop, the kind Piastri got the same afternoon, gave Norris a real chance of
+  coming out ahead of Verstappen instead of behind him, and either way put him back into the
+  fight laps sooner, with more laps left to attack instead of a queue to clear.</li>
+  <li>Two more laps at a pace already sitting in his recent lap times, no pit-stop fix required,
+  projects to a clean margin over Verstappen with room to spare.</li>
+  <li>Either path also keeps him out of traffic. The stop he got put him 0.7&nbsp;seconds behind
+  Russell and starts the whole fight-back from fifth; a clean exit keeps him in the clear air he
+  had built all race, and in position to race Antonelli directly rather than clear a
+  lapped-looking queue first.</li>
+</ul>
+<p>The slow stop is what turned a real chance to fight for the position into a clean loss of
+it. That part sits with the pit wall, not the Virtual Safety Car.</p>
+
+<div class="part" id="p6" data-toc-label="Part six &middot; Mercedes managed pace?">
+  <p class="part__k">Part six</p>
+  <p class="part__d">Could McLaren have managed Norris the way Mercedes managed Antonelli?</p>
+</div>
+<p>Antonelli said after the race that Mercedes had been managing his pace in case a Virtual
+Safety Car came out. His gap to Norris, however, barely moved through the lap the yellow flag
+fell in, <b>6.4&nbsp;s to 6.1&nbsp;s</b>. He may have been managing the pace, just not enough to
+call it a real &ldquo;strategic move&rdquo;.</p>
+<p>It would not have worked for Norris regardless. In the 37&nbsp;seconds between the local
+yellow and the VSC, Norris covered only about 17% of a lap, against 34% for Antonelli and 38%
+for Verstappen, roughly half their pace, already. Even accounting for where he was on the track
+at the time, he is the one furthest around the circuit each lap by virtue of leading it, so he
+is the one who reaches whatever caused the yellow first, before anyone else has a reason to
+lift. There was no spare pace for McLaren to bank for a VSC that had not been called yet,
+because Norris was already paying for it by the time it was.</p>
+
+<div class="method">
+  <p><b>Method.</b> Race: 2026-09-13, Spain (Madrid). Real gaps and lap times are measured
+  directly from the session&rsquo;s timing data: cumulative race time at each lap boundary for
+  lap-by-lap gaps, and a telemetry-grounded spatial layer for the exact-instant gap the moment the
+  VSC ended and the moment Norris exited the pit lane (both cross-checked against the
+  session&rsquo;s official position feed). Pit-loss figures come from the race&rsquo;s own
+  pit-stop timing data, filtered to green-flag stops only. Pace figures (the 0.5&ndash;0.6&nbsp;s
+  per lap underlying-pace edge cited in Part&nbsp;one) come from our internal fitted pace model,
+  isolating each driver&rsquo;s pace from tyre age, fuel load and traffic. The scenario in
+  Part&nbsp;three uses two different real measurements of &ldquo;how much slower the stop
+  was&rdquo; and reports both rather than picking one. The scenario in Part&nbsp;four uses only
+  real, already-measured lap times and gaps, no modeled projection beyond holding a stated pace
+  constant for two laps.</p>
+</div>
+
+<nav class="post-nav">
+  <a href="../index.html">&larr; All blogs</a>
+  <span></span>
+</nav>
+
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>AgenticF1</span>
+      <span class="t-faint">Analysis is descriptive, not predictive. Data: OpenF1.</span>
+      <a href="../about.html">About &amp; method</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
