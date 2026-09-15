@@ -3,6 +3,13 @@
   "//fields": "title, date (YYYY-MM-DD), url (relative to site root), dek, tags[], draft (optional bool)",
   "posts": [
     {
+      "title": "VSC costs Norris the win, Pitwall costs Norris the second",
+      "date": "2026-09-13",
+      "url": "blog/2026-09-13-vsc-wins-pitwall-costs-second.html",
+      "dek": "Norris led Madrid by 14 seconds, missed the free pit stop under a Virtual Safety Car by one lap, and paid close to the full green-flag price for a stop that should have been nearly free.",
+      "tags": ["race", "strategy", "2026"]
+    },
+    {
       "title": "Nobody qualified on pace",
       "date": "2026-09-05",
       "url": "blog/2026-09-05-nobody-qualified-on-pace.html",
