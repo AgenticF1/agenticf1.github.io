@@ -217,14 +217,17 @@
 
     // both panes get the same explicit y-axis domain (rather than each
     // auto-scaling to its own data — the axis pane has none) so their
-    // gridlines/ticks land on the same rows.
-    var yMax = Math.ceil(vmax * 1.05 * 10) / 10;
+    // gridlines/ticks land on the same rows. Round up to a whole unit (not
+    // vmax * 1.05 rounded to one decimal) so the top gridline is a clean
+    // number the auto ticks already land on, not a stray "6.2%" no team
+    // reaches.
+    var yMax = Math.max(1, Math.ceil(vmax));
 
     split.axis.setOption({
       grid: { left: 32, right: 4, top: gridTop, bottom: gridBottom, containLabel: false },
       xAxis: { type: "category", data: [""], show: false },
       yAxis: {
-        type: "value", min: 0, max: yMax,
+        type: "value", min: 0, max: yMax, inverse: true,
         axisLabel: { fontSize: 10, color: t.muted, formatter: metric === "pct" ? "{value}%" : "{value}" }
       },
       series: []
@@ -244,7 +247,7 @@
           color: function (v) { return v === "Season" ? t.faint : t.muted; } }
       },
       yAxis: {
-        type: "value", min: 0, max: yMax,
+        type: "value", min: 0, max: yMax, inverse: true,
         axisLine: { show: false }, axisLabel: { show: false }
       },
       series: series

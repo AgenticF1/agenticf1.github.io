@@ -81,17 +81,24 @@ def _linear_panel(model_df, X, model, fn, scale_info, col):
 
 
 def _tyre_panel(model_df, X, model, fn, scale_info, extra):
+    # degradation_shape="linear" fits have no "tyre_age_sq"/"tyre_age_sq__<group>"
+    # term at all (see fit_pace_model) — same guard as pace_model.visualize's
+    # panel_tyre_age/panel_tyre_age_per_compound, which this mirrors.
     coef = dict(zip(fn, model.coef_))
     group_cols = [c for c in fn if c.startswith("tyre_age__")]
 
-    if "tyre_age" in fn:                                   # shared quadratic curve
-        presid = partial_residual(model_df, X, model, fn, ["tyre_age", "tyre_age_sq"])
+    if "tyre_age" in fn:                                   # shared curve
+        quadratic = "tyre_age_sq" in fn
+        tyre_cols = ["tyre_age", "tyre_age_sq"] if quadratic else ["tyre_age"]
+        presid = partial_residual(model_df, X, model, fn, tyre_cols)
         age = model_df["tyre_age"].to_numpy(dtype=float)
         keep = _sample(_bulk(presid))
         tm, ts = scale_info["tyre_age"]
-        sm, ss = scale_info["tyre_age_sq"]
         xs = np.linspace(age.min(), age.max(), 24)
-        curve = coef["tyre_age"] * ((xs - tm) / ts) + coef["tyre_age_sq"] * ((xs ** 2 - sm) / ss)
+        curve = coef["tyre_age"] * ((xs - tm) / ts)
+        if quadratic:
+            sm, ss = scale_info["tyre_age_sq"]
+            curve = curve + coef["tyre_age_sq"] * ((xs ** 2 - sm) / ss)
         curve += presid.mean() - curve.mean()
         return {
             "mode": "shared",
@@ -105,6 +112,8 @@ def _tyre_panel(model_df, X, model, fn, scale_info, extra):
         age = model_df["tyre_age"].to_numpy(dtype=float)
         groups = model_df["compound"].map(extra["compound_groups"])
         keep = _sample(_bulk(presid))
+        tm, ts = scale_info["tyre_age"]          # per-group cols reuse the base scaling
+        sm, ss = scale_info.get("tyre_age_sq", (0.0, 1.0))
         curves = []
         for g in sorted(set(groups.dropna())):
             col, sq = f"tyre_age__{g}", f"tyre_age_sq__{g}"
@@ -113,10 +122,10 @@ def _tyre_panel(model_df, X, model, fn, scale_info, extra):
             m = (groups == g).to_numpy()
             if not m.any():
                 continue
-            tm, ts = scale_info["tyre_age"]      # per-group cols reuse the base scaling
-            sm, ss = scale_info["tyre_age_sq"]
             xs = np.linspace(age[m].min(), age[m].max(), 24)
-            c = coef[col] * ((xs - tm) / ts) + coef[sq] * ((xs ** 2 - sm) / ss)
+            c = coef[col] * ((xs - tm) / ts)
+            if sq in coef:
+                c = c + coef[sq] * ((xs ** 2 - sm) / ss)
             c += presid[m].mean() - c.mean()
             curves.append({"label": g, "compound": g,
                            "line": [[_r(a), _r(v)] for a, v in zip(xs, c)]})
@@ -238,14 +247,16 @@ def build(year: int = YEAR) -> dict:
             continue
         deg = row["degradation_choice"]
         traffic = row["traffic_choice"]
-        print(f"  {rid}  ({deg} / {traffic})")
+        shape = row["degradation_shape_choice"]
+        print(f"  {rid}  ({deg} / {traffic} / {shape})")
         _race, df, _nm, _tm, _dg = load_clean_race(pkl)
         model, fn, mdf, X, si, extra = fit_pace_model(
-            df, degradation_mode=deg, traffic_mode=traffic
+            df, degradation_mode=deg, traffic_mode=traffic, degradation_shape=shape,
         )
         out[rid] = {
             "degradation_mode": extra["degradation_mode"],
             "traffic_mode": extra["traffic_mode"],
+            "degradation_shape": extra["degradation_shape"],
             "fit_scope": row["fit_scope_choice"],
             "panels": {
                 "tyre": _tyre_panel(mdf, X, model, fn, si, extra),
