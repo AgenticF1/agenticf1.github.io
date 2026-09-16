@@ -136,7 +136,7 @@
     var maxAge = R.max_tyre_age, W = 400, H = 150, padL = 6, padR = 6, padT = 8, padB = 14;
     var ymin = 0, ymax = 0.001;
     var series = R.groups.map(function (g) {
-      var lin = coef[g.lin], quad = coef[g.quad], pts = [];
+      var lin = coef[g.lin], quad = g.quad ? coef[g.quad] : 0, pts = [];
       var base = g.key === R.ref_compound ? 0 : (coef["compound_" + g.key] || 0);
       for (var i = 0; i <= 40; i++) {
         var a = maxAge * i / 40, y = base + lin * a + quad * a * a;
@@ -237,7 +237,7 @@
   function compoundPaceSection() {
     var nonRef = R.compounds_nonref.filter(function (c) { return ("compound_" + c) in R.coef; });
     var offsetKeys = nonRef.map(function (c) { return "compound_" + c; });
-    var degKeys = R.groups.reduce(function (acc, g) { return acc.concat([g.lin, g.quad]); }, []);
+    var degKeys = R.groups.reduce(function (acc, g) { return acc.concat(g.quad ? [g.lin, g.quad] : [g.lin]); }, []);
     var allKeys = offsetKeys.concat(degKeys);
 
     var s = document.createElement("section");
@@ -290,7 +290,7 @@
           var cols = document.createElement("div");
           cols.className = "tyre-cols";
           cols.appendChild(tyreCol(g.lin, "Linear (s/lap)", R.coef[g.lin], R.std[g.lin]));
-          cols.appendChild(tyreCol(g.quad, "Curvature (s/lap²)", R.coef[g.quad], R.std[g.quad]));
+          if (g.quad) cols.appendChild(tyreCol(g.quad, "Curvature (s/lap²)", R.coef[g.quad], R.std[g.quad]));
           row.appendChild(cols);
         } else {
           row.insertAdjacentHTML("beforeend", '<div class="note">No degradation curve fitted for ' + compound + " this race.</div>");
@@ -399,7 +399,7 @@
   function loadRace(id) {
     R = PAYLOAD.races.filter(function (r) { return r.id === id; })[0] || PAYLOAD.races[0];
     coef = Object.assign({}, R.coef);
-    $("#wi-meta").textContent = R.n_laps + " clean laps · " + R.drivers.length + " drivers";
+    $("#wi-meta").textContent = R.n_laps + " clean laps · " + R.drivers.length + " drivers" + (R.note ? " · " + R.note : "");
     buildSections();
     refresh();
     try { localStorage.setItem("whatif_race", R.id); } catch (e) {}

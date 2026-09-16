@@ -210,6 +210,10 @@
 .whatif .tyre-row__head i { width: 9px; height: 9px; border-radius: 2px; flex: 0 0 auto; }
 .whatif .tyre-row__head .chip { margin-left: auto; }
 .whatif .tyre-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-3); }
+/* linear-shape races (see fit_pace_model's degradation_shape) have no
+   curvature term at all, so tyre-cols gets only one .tyre-col child — let it
+   span the full row instead of sitting at half width with an empty gap. */
+.whatif .tyre-cols .tyre-col:only-child { grid-column: 1 / -1; }
 .whatif .tyre-col label {
   display: block; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.04em;
   color: var(--ink-faint); margin-bottom: var(--space-1);

@@ -31,15 +31,16 @@ SITE = REPO_ROOT / "agentic_f1_project_page"
 YEAR = 2026
 
 VARIANT_AXES = [
-    ("shared_pooled_all", "shared", "pooled", "all"),
-    ("shared_pooled_top_n", "shared", "pooled", "top_n"),
-    ("shared_split_all", "shared", "split", "all"),
-    ("shared_split_top_n", "shared", "split", "top_n"),
-    ("per_compound_pooled_all", "per_compound", "pooled", "all"),
-    ("per_compound_pooled_top_n", "per_compound", "pooled", "top_n"),
-    ("per_compound_split_all", "per_compound", "split", "all"),
-    ("per_compound_split_top_n", "per_compound", "split", "top_n"),
+    (f"{deg}_{traffic}_{scope}_{shape}", deg, traffic, scope, shape)
+    for deg in ("shared", "per_compound")
+    for traffic in ("pooled", "split")
+    for scope in ("all", "top_n")
+    for shape in ("quadratic", "linear")
 ]
+# the reference point for "did the choice matter" / rank-shift sensitivity —
+# the original baseline model before the degradation_shape axis or the
+# per-compound-preferred rule existed.
+BASELINE_LABEL = "shared_pooled_all_quadratic"
 
 
 def _f(v):
@@ -130,7 +131,7 @@ def _variant_analysis(race_id: str, ao: Path):
 
     centred = clean.sub(clean.min(axis=0), axis=1)          # gap to fastest per variant
     row_spread = centred.max(axis=1) - centred.min(axis=1)
-    base_rank = clean["pure_pace_shared_pooled_all"].rank()
+    base_rank = clean[f"pure_pace_{BASELINE_LABEL}"].rank()
     per_driver_shift = pd.concat(
         [(clean[c].rank() - base_rank).abs() for c in cols], axis=1
     ).max(axis=1)
@@ -145,12 +146,13 @@ def _variant_analysis(race_id: str, ao: Path):
     }
 
     out = []
-    for (label, deg, traffic, scope), col in zip(VARIANT_AXES, cols):
+    for (label, deg, traffic, scope, shape), col in zip(VARIANT_AXES, cols):
         # absolute fitted lap time per driver under this variant (outlier cells masked)
         laps = {str(n): _f(v) for n, v in zip(comp["driver_number"], clean[col]) if pd.notna(v)}
         m = met.loc[label] if label in met.index else {}
         out.append({
             "label": label, "degradation": deg, "traffic": traffic, "fit_scope": scope,
+            "degradation_shape": shape,
             "n_extrap": int(m.get("n_compound_extrapolated", 0) or 0),
             "median_ci_sec": _f(m.get("median_ci_width_sec")),
             "r2": _f(m.get("r2")),
@@ -163,14 +165,22 @@ def _variant_analysis(race_id: str, ao: Path):
 def build(year: int = YEAR) -> dict:
     ao = REPO_ROOT / "analysis_out"
     cur = ao / f"season_{year}_pace_curated"
+    # Driver/team pace itself comes from the track-specific layer on top of
+    # `cur` (currently: Monaco's Pattern A clean-air substitution; Hungary is
+    # deliberately reverted back to `cur`'s own curated number — see
+    # `track_specific_analysis.season_with_track_specific`'s `skip_races`).
+    # Everything else this page needs (chosen_variant, coef_summary, the
+    # variant_selection/ dirs) is per-race pipeline metadata that track-specific
+    # substitution doesn't touch, so those still read from `cur`.
+    ts = ao / f"season_{year}_pace_curated_track_specific"
 
     # optional hand-curated "what stood out" bullets, keyed by race_id (see
     # todo/season_pace_race_insights_spec.md). Absent until that pass is done.
     insights_path = SITE / "data" / f"race_insights_{year}.json"
     insights = json.loads(insights_path.read_text()) if insights_path.exists() else {}
 
-    drv = pd.read_csv(cur / "pace_by_driver_by_race.csv")
-    tm = pd.read_csv(cur / "pace_by_team_by_race.csv")
+    drv = pd.read_csv(ts / "pace_by_driver_by_race.csv")
+    tm = pd.read_csv(ts / "pace_by_team_by_race.csv")
     coef = pd.read_csv(cur / "coef_summary_by_race.csv").set_index("race_id")
     chosen = pd.read_csv(cur / "chosen_variant.csv").set_index("race_id")
 
@@ -191,7 +201,7 @@ def build(year: int = YEAR) -> dict:
         rank_shift = sens.get("median_rank_shift") or 0
         spread = sens.get("median_driver_delta_spread_sec") or 0
         choice_matters = bool(
-            sel["chosen_label"] != "shared_pooled_all" or rank_shift > 1 or spread >= 0.15
+            sel["chosen_label"] != BASELINE_LABEL or rank_shift > 1 or spread >= 0.15
         )
 
         # drop the rationale's trailing sensitivity sentence — the page renders
