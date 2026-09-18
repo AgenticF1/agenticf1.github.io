@@ -3,6 +3,13 @@
   "//fields": "title, date (YYYY-MM-DD), url (relative to site root), dek, tags[], draft (optional bool)",
   "posts": [
     {
+      "title": "The only Safety Car case in a decade that punished pace itself",
+      "date": "2026-09-18",
+      "url": "blog/2026-09-18-only-vsc-that-punished-pace.html",
+      "dek": "A two-condition test for telling a Safety Car injustice from a bet that didn't pay off, run against ten years of the sport's loudest Safety Car controversies. Only one race clears both bars.",
+      "tags": ["strategy", "safety-car", "2026"]
+    },
+    {
       "title": "VSC costs Norris the win, Pitwall costs Norris the second",
       "date": "2026-09-13",
       "url": "blog/2026-09-13-vsc-wins-pitwall-costs-second.html",
