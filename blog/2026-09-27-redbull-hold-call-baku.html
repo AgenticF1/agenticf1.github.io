@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red Bull&rsquo;s Baku Hold Call &mdash; AgenticF1</title>
+<meta name="description" content="Verstappen passed Hadjar at Turn 1 and never converted it into anything. We reran the stint with the order held instead, corrected for a hold-position call team radio confirms happened, and every team-level number reverses.">
+
+<script>
+  try {
+    var m = localStorage.getItem("theme");
+    if (m === "light" || m === "dark") document.documentElement.setAttribute("data-theme", m);
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/layout.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/blog.css">
+
+<script src="../assets/js/theme.js" defer></script>
+<script src="../assets/js/nav.js" defer></script>
+<script src="../assets/js/toc.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-title" href="../index.html">AgenticF1</a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="../index.html">Blogs</a>
+        <a href="../season-pace.html">Season pace</a>
+        <a href="../about.html">About</a>
+        <button class="btn theme-toggle" data-theme-toggle type="button" aria-label="Change theme">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="8" cy="8" r="3.2"/>
+            <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M13 3l-1.4 1.4M4.4 11.6L3 13" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container">
+      <div class="with-rail">
+
+        <aside class="with-rail__rail">
+          <nav class="toc" data-toc data-toc-source=".article" data-toc-title="On this page"></nav>
+        </aside>
+
+        <article class="article center">
+
+<header class="article__header">
+  <p class="t-eyebrow">Baku &middot; 2026 Azerbaijan Grand Prix &middot; Strategy</p>
+  <h1 class="t-h1 article__title">Red Bull&rsquo;s real call at Baku cost the team the position it was trying to protect</h1>
+  <p class="article__dek">Verstappen passed Hadjar at Turn&nbsp;1 on lap&nbsp;7, spent the rest of the
+  stint stuck behind Piastri, and never got through. We ran the counterfactual: what if Red Bull had
+  held him back instead. Read the pace at face value and the answer says the team made the right call.
+  Correct for the one thing the pace model cannot see on its own, a hold-position radio call team radio
+  confirms really happened, and the answer flips.</p>
+  <p class="article__byline"><span>2026-09-27</span><span>AgenticF1</span></p>
+</header>
+
+<div class="part" id="p1" data-toc-label="Part one">
+  <p class="part__k">Part one</p>
+  <h2 id="s1" class="part__d" data-toc-label="What happened">What happened</h2>
+</div>
+<p>Lap 7, Turn 1. Verstappen overtakes Hadjar. A clean pass, the kind a team wants from its
+faster car. Then nothing. For the next twenty-one laps Verstappen sits behind
+Piastri&rsquo;s McLaren,
+never inside a second at the one point on track where a run turns into an overtake, and finishes
+the stint exactly where he started it: stuck. Real positions at lap&nbsp;28, the last clean lap
+before the Albon-incident Safety Car neutralizes the race: Piastri second, Verstappen third,
+Hadjar fourth.</p>
+<p>Hadjar, meanwhile, kept closing. At lap&nbsp;20, same corner, he comes back at Verstappen and
+gets to within eight thousandths of a second, close enough that we found it by accident scanning
+the timing data for outliers. Verstappen holds the position. But the gap that let him do it was
+already gone.</p>
+
+<div class="part" id="p2" data-toc-label="Part two">
+  <p class="part__k">Part two</p>
+  <h2 id="s2" class="part__d" data-toc-label="What the pace numbers say, taken at face value">What the pace numbers say, taken at face value</h2>
+</div>
+<p>We reran the race from that exact lap-7 instant with Hadjar&rsquo;s pass never happening.
+Verstappen, running fresh simulations instead of replaying history, still gets past Hadjar in
+38% of them. In the rest, Hadjar holds, the way he nearly did for real. We let the model run
+each version out to lap&nbsp;28 and counted where everyone landed.</p>
+<div class="finding">
+  <b>Holding Verstappen back looks like the wrong call</b>
+  <p>Across 2,000 simulated versions of the rest of the stint, the team&rsquo;s chance of getting
+  at least one car past Piastri drops from <b>87%</b> (the real outcome, replayed forward) to 79%
+  if Verstappen is held. The team&rsquo;s combined finishing position gets worse, not better.
+  Verstappen is the faster car by close to three tenths of a second a lap on the numbers
+  Hadjar&rsquo;s held SOFT-stint laps produced, and holding him back wastes more of that edge than
+  Hadjar&rsquo;s own shot at Piastri gains back.</p>
+</div>
+<p class="pull">That is the honest answer to the question as asked. It is also built entirely on one number: how fast Hadjar&rsquo;s tyre really was.</p>
+
+<div class="part" id="p3" data-toc-label="Part three">
+  <p class="part__k">Part three</p>
+  <h2 id="s3" class="part__d" data-toc-label="The number that number gets wrong">The number that number gets wrong</h2>
+</div>
+<p>Start with the tyre. SOFT was a significantly faster compound at Baku this weekend, worth close
+to three tenths of a second a lap over MEDIUM once tyre age is accounted for. That gap alone is
+enough to explain most of the modeled difference between the two Red Bull drivers above.</p>
+<p>The gap may run wider still for this specific car. Verstappen raced both tyres for real at
+different points in the weekend. On SOFT, he ran about a
+quarter of a second a lap faster than his own overall race pace would predict. On MEDIUM, he ran
+about a tenth of a second slower. Both point the same way: this Red Bull, this weekend, seems to
+like the softer tyre more, and the medium one less, than the field average says it should.</p>
+<p>Which is exactly why Hadjar&rsquo;s SOFT number cannot be trusted at face value. Team radio
+confirms Red Bull told him to hold position for the whole of that stint, so his lap times measure
+the gap he was told to hold, not the pace he had. He does have one clean read on his own pace,
+though: a second stint, later, on MEDIUM, with nobody racing him for the place and nobody to hold.
+It is the only part of his race not shaped by the instruction.</p>
+<p>Put it together and projecting his SOFT pace from that clean MEDIUM stint is a reasonable call,
+maybe even a cautious one. If this Red Bull really does favor SOFT the way Verstappen&rsquo;s own
+laps say it does, Hadjar&rsquo;s real gap to Verstappen on SOFT could be wider than what this
+projection uses, not narrower.</p>
+<div class="finding">
+  <b>The projection</b>
+  <p>On his clean MEDIUM stint, Hadjar ran about 0.13&nbsp;s a lap faster than expected. On the
+  held SOFT stint, about 0.08&nbsp;s a lap slower than expected. Carry that same excess pace onto
+  his SOFT tyre instead of the number his held laps produced, and his real gap to Verstappen at the
+  start of the stint shrinks to three hundredths of a second, close enough that the crossover point
+  where his tyre&rsquo;s shallower wear rate should put him ahead moves from lap&nbsp;26 to
+  lap&nbsp;17. Nine laps earlier. Nine more laps of him being the faster car, not the one running
+  defense.</p>
+</div>
+<p class="t-note">Although Hadjar&rsquo;s pace comes from nine clean laps only, the 0.13&nbsp;s
+difference still tells a story beyond noise.</p>
+
+<div class="part" id="p4" data-toc-label="Part four">
+  <p class="part__k">Part four</p>
+  <h2 id="s4" class="part__d" data-toc-label="Rerunning it with his real pace">Rerunning it with his real pace</h2>
+</div>
+<p>We reran the same 2,000-version counterfactual, this time giving Hadjar the pace his own unheld
+laps say he had. Every team number reverses.</p>
+<p>The chance of at least one Red Bull car getting past Piastri climbs to 92%, above even the real
+outcome. The team&rsquo;s combined finishing position improves, not worsens. Piastri, facing a
+driver who is now faster in fact and not just on paper, gets passed more often and more
+decisively: Hadjar&rsquo;s own conversion rate against him climbs from 69% to 85%.
+Verstappen&rsquo;s numbers improve too, which is the part worth sitting with. He is stuck behind
+his own teammate more often in this version, not less, and still comes out ahead overall, because
+a Hadjar who clears Piastri sooner drags the whole pair forward with him.</p>
+<p>We did not want the answer to hinge on trusting one measured number to the millisecond, so we
+checked how much of that 0.13&nbsp;s correction the conclusion needs to hold. The break-even
+point, where holding Verstappen stops being worse than what really happened, sits at about
+0.014&nbsp;seconds a lap, a fourteenth of what Hadjar&rsquo;s own second stint measured. The
+reversal does not require believing the full number. It survives almost any real suppression at
+all.</p>
+<p>Hadjar does not need to be anywhere near that fast for the correction to matter. We reran the
+hold at a few points between no correction and the full measured one. Hadjar and Verstappen below
+are each driver&rsquo;s own mean finishing position at lap&nbsp;28; the team-level picture turns
+favorable well before reaching the full correction:</p>
+<div class="table-scroll">
+  <table class="table fixed">
+    <colgroup><col style="width:30%"><col style="width:15%"><col style="width:17%"><col style="width:16%"><col style="width:22%"></colgroup>
+    <thead>
+      <tr><th class="l">Hadjar&rsquo;s pace</th><th>Hadjar</th><th>Verstappen</th><th>Team sum</th><th>Beats Piastri</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="l">Real result</td><td>3.31</td><td>2.34</td><td>5.65</td><td>87%</td></tr>
+      <tr><td class="l">Held, no correction</td><td>2.60</td><td>3.16</td><td>5.76</td><td>79%</td></tr>
+      <tr><td class="l">Held, 0.03&nbsp;s/lap faster</td><td>2.53</td><td>2.98</td><td>5.52</td><td>89%</td></tr>
+      <tr><td class="l">Held, 0.06&nbsp;s/lap faster</td><td>2.45</td><td>3.00</td><td>5.45</td><td>90%</td></tr>
+      <tr><td class="l">Held, 0.09&nbsp;s/lap faster</td><td>2.32</td><td>3.09</td><td>5.40</td><td>91%</td></tr>
+      <tr><td class="l">Held, 0.13&nbsp;s/lap faster (measured)</td><td>2.32</td><td>3.02</td><td>5.34</td><td>92%</td></tr>
+    </tbody>
+  </table>
+</div>
+<p class="pull">A correction of just three hundredths, about a quarter of what Hadjar&rsquo;s own clean stint measured, already beats the real result on every column but Verstappen&rsquo;s own position. By six hundredths the team sum is already better than what really happened. The full 0.13&nbsp;s is not the number doing the work here. Almost any real amount of suppression is.</p>
+
+<div class="part" id="p5" data-toc-label="Part five">
+  <p class="part__k">Part five</p>
+  <h2 id="s5" class="part__d" data-toc-label="What cost Red Bull">What cost Red Bull</h2>
+</div>
+<p>Red Bull swapped the order seven laps into a stint that ran another twenty-one, and never
+revisited the call. That is not good information leading to a bad decision. The team&rsquo;s own
+decision is the reason better information never got the chance to show up. A Verstappen who looks
+clearly faster because Hadjar was pulled off him after four laps of actual racing is not a
+measurement. It is a number the team manufactured and then treated as ground truth for the rest of
+the stint.</p>
+<p>It also had a chance to notice. During the stint, the team kept checking in with Hadjar over
+team radio about his pace. At lap&nbsp;20, the same corner the order was settled at, Hadjar
+closed to within eight thousandths of a second of Verstappen&rsquo;s bumper. That is about as
+direct a signal as this sport hands a pit wall that a call made under pressure is starting to look
+wrong in real time. The order held anyway.</p>
+<div class="finding">
+  <b>Not a bet that failed. A bet that was never placed</b>
+  <p>Corrected for what the team&rsquo;s own instruction did to the numbers, holding Hadjar ahead
+  was the decision that helps Red Bull as a team. Letting Verstappen through is the one that costs
+  it. The team did not lose a bet it was reasonable to place. It closed off the option most likely
+  to have paid, on the strength of four laps, then sat on that call through a lap that was all but
+  telling it to reconsider.</p>
+</div>
+<p>There was a bigger version of this it also gave up. Picture the stint where Hadjar clears
+Piastri instead of the other way round, then holds him through the castle section, the tight,
+technical stretch of the lap where following someone costs a trailing car more time than anywhere
+else on the circuit. Every extra tenth Piastri spends defending there instead of extending is a
+tenth Verstappen gets back, in exactly the part of the lap where chasing anyone down is hardest for
+him. That is both Red Bull cars clearing Piastri, built by the two of them working the corner
+together. What happened instead was one car stuck alone behind a rival for twenty-one laps, because
+the team had already decided which of its drivers was allowed to be the one racing.</p>
+
+<div class="method">
+  <p><b>Method.</b> Race: 2026-09-26, Azerbaijan (Baku). All positions and gaps for laps&nbsp;7
+  through 28 are real, measured values from the session&rsquo;s timing data and telemetry-grounded
+  spatial layer; lap&nbsp;28 is the last lap before the Albon-incident Safety Car and before any of
+  the three drivers&rsquo; own first pit stops. The counterfactual (Parts two and four) resumes our
+  internal mini-sector race simulator from Hadjar&rsquo;s own real lap-7 crossing and runs 2,000
+  Monte Carlo trials of the rest of the stint per scenario; Part two lets the real Turn&nbsp;1 pass
+  stand as the baseline, Part four forces a fresh, model-drawn contest at that same crossing. Our
+  simulator&rsquo;s overtake model likely overstates Red Bull&rsquo;s overtake chances slightly in
+  this race; that overstatement is consistent across every scenario compared here, so we do not
+  believe it changes the conclusions. Pace
+  figures (the tyre offset in Part three, and Hadjar&rsquo;s and Verstappen&rsquo;s own residual
+  pace on each compound) come from our internal fitted pace model, isolating each driver&rsquo;s
+  pace from tyre age, fuel load, and traffic; Verstappen&rsquo;s and Hadjar&rsquo;s residuals are
+  each driver&rsquo;s own real lap times measured against what that same model would otherwise
+  expect of them.</p>
+</div>
+
+<nav class="post-nav">
+  <a href="../index.html">&larr; All blogs</a>
+  <span></span>
+</nav>
+
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>AgenticF1</span>
+      <span class="t-faint">Analysis is descriptive, not predictive. Data: OpenF1.</span>
+      <a href="../about.html">About &amp; method</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

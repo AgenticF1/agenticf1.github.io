@@ -3,6 +3,13 @@
   "//fields": "title, date (YYYY-MM-DD), url (relative to site root), dek, tags[], draft (optional bool)",
   "posts": [
     {
+      "title": "Red Bull's real call at Baku cost the team the position it was trying to protect",
+      "date": "2026-09-27",
+      "url": "blog/2026-09-27-redbull-hold-call-baku.html",
+      "dek": "Verstappen passed Hadjar at Turn 1 and never converted it into anything. We reran the stint with the order held instead, corrected for a hold-position call team radio confirms happened, and every team-level number reverses.",
+      "tags": ["strategy", "race", "2026"]
+    },
+    {
       "title": "The only Safety Car case in a decade that punished pace itself",
       "date": "2026-09-18",
       "url": "blog/2026-09-18-only-vsc-that-punished-pace.html",
