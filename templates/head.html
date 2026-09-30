@@ -4,7 +4,11 @@
     site root (index.html, about.html) : href="assets/..."
     /blog/*.html                       : href="../assets/..."
   Keep the pre-paint theme script FIRST and inline — it prevents a flash.
+  analytics.js carries the GA4 gtag setup (tracking ID G-LG0X3X6YDH) — one
+  script tag here loads it, so the tag lives in exactly one place to update.
   =========================================================================== -->
+
+<script src="assets/js/analytics.js"></script>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
