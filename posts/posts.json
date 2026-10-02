@@ -3,6 +3,13 @@
   "//fields": "title, date (YYYY-MM-DD), url (relative to site root), dek, tags[], draft (optional bool)",
   "posts": [
     {
+      "title": "[Recap] Norris's pit stop at Spa was slow, and the window that would have fixed it went unused",
+      "date": "2026-10-02",
+      "url": "blog/2026-07-19-norris-pit-strategy-spa.html",
+      "dek": "Piastri pitted lap 20 under a VSC, for 2.8 seconds. Norris pitted lap 30, clean, for 7.8. We quantified both mistakes with the race simulator: the slow stop cost a little, the missed window cost close to two full positions.",
+      "tags": ["strategy", "race", "2026"]
+    },
+    {
       "title": "Red Bull's real call at Baku cost the team the position it was trying to protect",
       "date": "2026-09-27",
       "url": "blog/2026-09-27-redbull-hold-call-baku.html",

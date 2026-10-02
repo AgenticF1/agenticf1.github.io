@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="../assets/js/analytics.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Norris&rsquo;s Spa Pit Window Recap &mdash; AgenticF1</title>
+<meta name="description" content="Piastri pitted lap 20 under a VSC. Norris pitted lap 30, clean, for a slow 7.8-second stop. We quantified both mistakes with the race simulator: the slow stop cost a little, the missed window cost close to two full positions.">
+
+<script>
+  try {
+    var m = localStorage.getItem("theme");
+    if (m === "light" || m === "dark") document.documentElement.setAttribute("data-theme", m);
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/layout.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/blog.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.6.0/echarts.min.js"></script>
+<script src="../assets/js/charts.js"></script>
+
+<script src="../assets/js/theme.js" defer></script>
+<script src="../assets/js/nav.js" defer></script>
+<script src="../assets/js/toc.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-title" href="../index.html">AgenticF1</a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="../index.html">Blogs</a>
+        <a href="../season-pace.html">Season pace</a>
+        <a href="../about.html">About</a>
+        <button class="btn theme-toggle" data-theme-toggle type="button" aria-label="Change theme">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="8" cy="8" r="3.2"/>
+            <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M13 3l-1.4 1.4M4.4 11.6L3 13" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container">
+      <div class="with-rail">
+
+        <aside class="with-rail__rail">
+          <nav class="toc" data-toc data-toc-source=".article" data-toc-title="On this page"></nav>
+        </aside>
+
+        <article class="article center">
+
+<header class="article__header">
+  <p class="t-eyebrow">Spa &middot; 2026 Belgian Grand Prix &middot; Race recap</p>
+  <h1 class="t-h1 article__title">[Recap] Norris&rsquo;s pit stop at Spa was slow, and the window that would have fixed it went unused</h1>
+  <p class="article__dek">Piastri pitted lap&nbsp;20, under a VSC, for 2.8 seconds. Norris pitted lap&nbsp;30, clean,
+  for 7.8. Read the stationary time on its own and it sounds like a good stop. Set it against the other 27 real
+  pit stops that happened at Spa that day and it is one of the slowest in the field. We ran the counterfactuals
+  for both mistakes, the slow stop and the missed window, and found the second one cost far more than the first.</p>
+  <p class="article__byline"><span>2026-10-02</span><span>AgenticF1</span></p>
+</header>
+
+<div class="part" id="p1" data-toc-label="Part one">
+  <p class="part__k">Part one</p>
+  <h2 id="s1" class="part__d" data-toc-label="What happened">What happened</h2>
+</div>
+<p>Norris qualified third and started thirteenth, a ten-place drop from an engine-part change.</p>
+<p>He moved up to sixth by lap&nbsp;13, then passed his own teammate right before the virtual safety car,
+before being repassed. Call it yo-yoing.</p>
+<p>Then the pit stops started. Piastri boxed on lap&nbsp;20, under a Virtual Safety Car deployed a minute
+and a half earlier for a Lindblad-Lawson incident at Turn&nbsp;5. Norris stayed out. By lap&nbsp;30, worn
+tyres had pulled him back to fourth, and unable to wait for another VSC or SC, he boxed for MEDIUM: full
+pit-lane cost, no caution to hide behind, 7.8 seconds stationary, 28.3 total. He rejoined behind Bortoleto
+and Hadjar, managed one pass, and could never get close enough to pass Hadjar.</p>
+<p>It was not for lack of pace. Nine of the ten fastest laps of the entire race, from any driver, are
+Norris&rsquo;s, set chasing Hadjar over the final 12 laps of his own second stint. He closed from 10.4
+seconds back on lap&nbsp;33 to 1.05 seconds. He ran out of laps, not speed.</p>
+
+<div class="part" id="p2" data-toc-label="Part two">
+  <p class="part__k">Part two</p>
+  <h2 id="s2" class="part__d" data-toc-label="The pace was never the problem">The pace was never the problem</h2>
+</div>
+<p>Belgium&rsquo;s fitted pace model ranks Norris third of 21 drivers this race, 0.244 seconds off the fastest
+fitted pace and 0.013 seconds off Leclerc in second, effectively tied for the second-quickest driver on track.
+Piastri, the teammate who beat him to the flag, rates seventh: 0.660 seconds off the same baseline, 0.416
+seconds slower than Norris on raw pace this race. Full breakdown: <a href="../race.html?r=2026-07-19_Belgium_Race">Belgium race-pace page</a>.</p>
+<div class="finding">
+  <b>Norris was the faster McLaren</b>
+  <p>Close to half a second a lap faster than his own teammate this race, and he finished two places behind
+  him. Pace is not what cost him Saturday&rsquo;s third or Sunday&rsquo;s charge to the lead. Something else
+  did, twice, in the pits.</p>
+</div>
+
+<div class="part" id="p3" data-toc-label="Part three">
+  <p class="part__k">Part three</p>
+  <h2 id="s3" class="part__d" data-toc-label="Two mistakes, and how we isolated them">Two mistakes, and how we isolated them</h2>
+</div>
+<p>The first mistake is the number everyone already quoted: 7.8 seconds sounds slow next to Piastri&rsquo;s
+2.8. Spa&rsquo;s own pit lane backs it up: eight real stops at this track fit a positional model averaging
+22.5 seconds total, and Norris ran 5.8 seconds over that, split across a slow wheel change and a lane transit
+that ran long on both sides of it.</p>
+<p>The second mistake is the pit window: Norris never used the VSC window his own teammate had already used
+ten laps earlier. We checked how long it stayed open rather than assuming. Deployment landed a little past
+halfway through lap&nbsp;20, and the all-clear came 14% into lap&nbsp;21 for Norris, who was running the
+same slowed track at the same moment on his original tyres.</p>
+<p>We isolated each mistake on its own, everyone else&rsquo;s race held fixed, using our internal race
+simulator&rsquo;s resume feature: replay Norris&rsquo;s real history up to a chosen instant exactly as it
+happened, then Monte Carlo the rest of the race from there, 500 trials per variant.</p>
+<ul>
+  <li><b>Stop quality</b>, holding the lap fixed at 30: resume right after his real stop (the real
+  7.8s/28.3s baked into history) against resume right before it, with the stop itself redrawn fresh from the
+  race&rsquo;s own pit-loss distribution instead of his real number. Any gap between the two isolates what
+  the slow wheel change alone cost.</li>
+  <li><b>Stop timing</b>, holding stop quality out of it: resume at Norris&rsquo;s own start of lap&nbsp;21,
+  right after Piastri&rsquo;s stop, with his real strategy (pit at 30) against a version where his stop is
+  moved to fire immediately, lap&nbsp;21. Because this resumes nine laps earlier than the first comparison,
+  incorporating more Monte Carlo and less real history, we ran a control alongside it: same lap-21 resume
+  point, real lap-30 strategy left untouched. If the control lands close to the lap-30-resume numbers above,
+  the earlier resume point is not doing the work by itself, and any gap to the lap-21-stop version is really
+  about the timing.</li>
+</ul>
+
+<div class="part" id="p4" data-toc-label="Part four">
+  <p class="part__k">Part four</p>
+  <h2 id="s4" class="part__d" data-toc-label="What the simulator says">What the simulator says</h2>
+</div>
+
+<figure class="figure card">
+  <h3 class="t-h3">Norris&rsquo;s simulated finishing position, three pit-stop variants</h3>
+  <div id="c_pos" class="chart" style="height:340px"></div>
+  <figcaption class="figure__cap">500 resumed Monte&nbsp;Carlo trials per variant, everyone else&rsquo;s
+  real race unchanged. Dots = every trial (jittered). Shaded shape = the distribution. Bar = mean, diamond
+  = median.</figcaption>
+</figure>
+
+<div class="table-scroll">
+  <table class="table fixed">
+    <colgroup><col style="width:46%"><col style="width:18%"><col style="width:14%"><col style="width:22%"></colgroup>
+    <thead>
+      <tr><th class="l">Variant</th><th>Mean position</th><th>Median</th><th>P5 or better</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="l">His real stop, lap 30 (real 7.8s/28.3s baked in)</td><td>6.78</td><td>P7</td><td>0.0%</td></tr>
+      <tr><td class="l">Average stop, same lap 30</td><td>6.71</td><td>P7</td><td>0.2%</td></tr>
+      <tr><td class="l">Control: resume at lap 21, real lap-30 strategy kept</td><td>6.65</td><td>P7</td><td>3.2%</td></tr>
+      <tr><td class="l">Pit moved to lap 21, one lap after Piastri</td><td><b>4.80</b></td><td><b>P5</b></td><td><b>71.2%</b></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The control is the number that makes this comparison trustworthy. Resuming nine laps earlier than the
+stop-quality pair, with nothing else changed, lands at 6.65, inside a tenth of the lap-30 numbers above it.
+The earlier resume point is not inflating anything on its own. The gap that opens once the stop moves to
+lap&nbsp;21, mean position falling from 6.65 to 4.80, is the timing effect on its own, not an artifact of
+giving the model more race to work with.</p>
+<p>Neither effect is invented, and the smaller one should not be dismissed. The stop-quality pair really
+does move the mean by only 0.07 of a position across 500 trials, because 5.8 seconds is a small input
+against 14 more laps of ordinary racing randomness, averaged out. But 5.8 seconds of real time is not
+noise, and Norris finished the race 1.05 seconds behind Hadjar. An average stop instead of his real one
+gives back more than five times that margin. It would not have guaranteed sixth, but it puts a fight for
+sixth back in range, which his real stop never did. The timing mistake is still the bigger one by a wide
+margin: moving the same stop one lap earlier shifts the mean by 1.85 positions, and turns a driver who
+reaches P5 or better in about one trial out of thirty on his real strategy into one who does it in seven
+trials out of ten.</p>
+<p class="pull">Bigger, not exclusive.</p>
+
+<div class="part" id="p5" data-toc-label="What cost McLaren">
+  <p class="part__k">Part five</p>
+  <h2 id="s5" class="part__d" data-toc-label="What cost McLaren">What cost McLaren</h2>
+</div>
+<p>Both mistakes were real, and the simulator puts a number on each rather than leaving it at an impression.
+The slow stop cost a little. The missed VSC window cost close to two full positions, more than the entire
+gap between where Norris finished and where his teammate did. Nobody needed this piece to see Piastri box
+under the VSC while Norris stayed out; what the broadcast could not show was the size of it. Reacting to
+Piastri&rsquo;s stop the way a one-car team reacts to its own data would have put Norris back in the group
+he&rsquo;d spent the first twenty laps overtaking, not stuck behind Hadjar for a full second stint.</p>
+<p>He still nearly did it the hard way. Nine of the ten fastest laps in the race, twelve laps spent closing
+a ten-second gap down to 1.05, a margin the slow stop alone was more than five times the size of.</p>
+<p class="pull">The pace was never in question at Spa. The pit wall&rsquo;s two calls were.</p>
+
+<div class="method">
+  <p><b>Method.</b> Race: 2026-07-19, Belgium (Spa-Francorchamps). Pace figures in Part two come from our
+  internal fitted pace model, isolating each driver&rsquo;s pace from tyre age, fuel load, and traffic. The
+  pit-stop ranking and the 22.5-second positional pit-loss average in Part three come from every real stop
+  timed at Spa that day, and from a telemetry-reconstructed entry/stationary/exit model fit to eight of them.
+  The counterfactuals in Part four resume our internal mini-sector race simulator from a real historical
+  instant (Norris&rsquo;s own lap-30 or lap-21 crossing, as stated per variant) and run 500 Monte&nbsp;Carlo
+  trials of the rest of the race per variant, with every other driver&rsquo;s real strategy held fixed. All
+  four variants share the same random seed, so differences between them come from the scenario, not from
+  which random draws happened to land where.</p>
+</div>
+
+<nav class="post-nav">
+  <a href="../index.html">&larr; All blogs</a>
+  <span></span>
+</nav>
+
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>AgenticF1</span>
+      <span class="t-faint">Analysis is descriptive, not predictive. Data: OpenF1.</span>
+      <a href="../about.html">About &amp; method</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+var GROUPS = [{"label":"His real stop, lap 30","vals":[7,7,6,7,7,7,7,7,6,7,6,7,7,7,7,7,6,7,7,6,7,7,6,6,7,6,7,6,7,7,6,7,6,7,7,7,7,7,6,7,6,7,7,7,7,6,7,6,7,7,7,6,7,7,6,7,7,7,7,7,7,7,7,6,6,7,7,7,7,7,6,7,7,7,6,7,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,7,7,7,7,7,7,7,7,7,6,6,7,6,7,7,7,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,7,7,7,6,7,7,6,6,7,7,7,7,7,7,7,7,7,6,6,7,7,7,6,6,7,7,6,7,7,6,7,6,7,7,7,7,6,7,6,7,7,6,7,7,6,7,6,7,7,7,7,6,7,7,7,7,6,7,7,7,7,6,7,6,7,7,7,7,7,6,7,7,7,7,6,7,6,7,7,6,7,7,7,7,7,7,7,7,7,6,7,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,7,7,7,7,7,7,7,6,7,7,7,7,7,7,6,7,6,7,7,7,7,7,7,7,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,7,7,7,7,7,6,7,7,6,7,6,7,7,7,7,7,7,6,6,7,7,6,7,7,6,6,7,6,7,7,7,7,7,7,6,6,6,6,7,6,7,7,7,7,7,7,7,7,6,7,7,7,7,7,7,7,7,7,7,6,7,7,7,6,7,7,7,7,7,7,7,7,7,7,7,7,6,7,7,7,7,7,7,7,7,7,6,7,7,6,7,7,7,7,6,6,7,6,7,7,7,7,7,7,7,7,7,7,7,7,7,6,7,6,7,7,7,7,6,7,7,6,7,7,7,6,7,7,7,7,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,7,7,6,7,7,7,6,7,7,7,7,7,7,7,6,6,6,6,7,7,7,7,6,7,7,6,7,7,7,7,7,7,7,7,7,7,7,7,6,7,7,6,6,7,7,6,7,7,7,6,7,6,7,7,7,7,7,6,7,7,7,7,7,7,7,7,7,6,7,6,7,6,6,7,6,7,7]},{"label":"Average stop, same lap","vals":[7,7,7,6,6,7,7,7,7,6,7,7,6,7,7,7,6,7,7,6,6,7,6,7,7,7,7,7,6,7,7,7,7,6,7,6,7,6,7,7,7,7,6,7,6,6,7,6,7,7,7,7,7,7,7,7,7,6,7,6,7,7,7,7,7,7,7,7,6,6,7,7,7,7,7,7,6,7,7,7,7,7,7,7,7,7,6,7,7,7,6,7,6,7,7,7,7,6,7,7,6,7,6,7,6,6,6,6,7,6,7,7,6,7,6,7,7,7,6,7,7,6,6,7,6,7,7,7,6,7,7,7,7,7,7,6,7,7,6,7,7,6,7,7,7,7,6,6,7,7,7,7,6,7,6,7,7,7,6,7,7,6,7,6,7,6,7,7,7,7,7,7,7,7,7,7,7,7,7,6,6,7,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,6,7,7,7,7,4,6,7,6,6,7,7,7,7,6,7,7,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,7,6,7,7,7,7,7,7,6,7,7,7,6,6,7,7,6,6,7,6,7,6,7,7,7,7,7,7,7,7,7,7,6,7,7,6,7,7,7,7,6,7,7,7,6,7,7,6,7,6,6,6,7,6,7,7,7,7,7,6,7,7,6,7,6,7,6,6,7,7,7,7,7,7,6,6,6,6,6,7,7,7,7,7,6,7,7,7,6,6,7,7,7,7,7,7,7,7,7,7,7,6,7,7,6,7,7,7,7,7,7,6,7,6,6,6,7,6,7,7,6,7,6,7,7,7,6,7,6,6,7,7,6,6,6,6,7,7,7,6,7,7,6,7,6,7,7,7,7,7,6,7,6,7,7,7,7,7,7,7,7,7,7,6,6,7,7,7,7,6,6,7,6,7,6,7,7,7,7,7,7,7,7,7,7,6,6,7,7,7,6,7,7,7,7,7,7,7,7,7,6,7,6,7,7,7,7,6,6,7,7,7,6,7,7,7,7,7,7,7,7,7,7,6,7,7,7,7,6,6,6,7,7,7,7,6,7,6,7,7,6,7,6,6,6,7,7,6,6,6,7,7,7,7,7,7,6,7,7,7,7,7,7,7,7,6,7,7,6]},{"label":"Pit moved to lap 21","vals":[5,6,6,4,4,6,3,4,5,6,5,3,5,6,4,6,6,5,6,5,4,5,5,4,4,4,4,4,4,5,4,4,5,4,6,6,5,6,4,6,4,5,3,5,6,5,5,6,6,6,6,6,6,4,4,4,5,4,5,6,5,5,4,5,4,5,4,4,4,5,4,4,4,5,4,6,6,3,6,5,6,5,3,5,5,6,5,4,6,5,5,6,6,6,5,6,5,3,6,4,3,5,4,6,4,4,3,6,3,6,5,4,4,5,5,4,4,6,5,6,5,4,5,5,3,5,4,4,5,6,6,6,4,6,6,6,5,6,6,5,6,4,5,4,5,4,6,4,5,4,5,3,4,5,5,6,5,4,5,5,5,6,6,4,6,3,5,5,5,6,5,4,4,6,5,5,3,5,5,6,5,4,3,6,4,5,5,4,3,5,6,5,5,3,6,4,6,5,5,6,6,5,6,6,4,6,6,6,5,5,3,5,5,5,6,5,5,5,6,5,5,4,3,5,4,5,3,3,5,4,4,5,6,6,4,4,4,6,6,6,5,4,5,6,6,4,3,6,6,4,5,5,3,5,5,5,6,5,5,4,4,6,6,5,4,3,6,3,5,6,6,5,5,6,6,5,3,4,4,6,6,4,6,3,3,4,5,6,5,5,4,5,6,4,5,3,5,4,6,6,4,5,6,4,5,6,5,5,5,6,4,4,5,5,5,5,6,3,5,4,6,4,6,4,6,6,6,4,6,5,5,5,3,6,6,5,4,6,6,5,5,6,3,3,5,4,3,6,6,6,6,4,4,4,6,5,5,6,5,5,3,6,4,3,4,4,5,5,4,6,5,3,5,6,4,5,5,6,3,3,4,4,5,3,5,3,6,4,5,5,6,5,5,6,5,4,5,5,3,5,4,4,6,3,3,5,5,4,5,4,6,5,3,6,4,6,3,5,4,4,3,4,5,4,5,5,6,6,3,5,6,4,3,3,6,6,6,4,3,4,5,5,6,5,4,5,5,3,3,4,5,5,5,6,6,3,3,5,5,5,4,4,5,6,5,6,4,3,3,4,5,5,6,4,6,4,4,4,3,4,5,6,4,5,4,6,6,6,4,6,4,3,4,6,6,4,6,6,5,3]}];
+
+function jitter(i, seed) {
+  var v = (Math.sin((i + 1) * 12.9898 + seed * 78.233) * 43758.5453);
+  return v - Math.floor(v);
+}
+function mean(a) { return a.reduce(function (x, y) { return x + y; }, 0) / (a.length || 1); }
+function median(a) {
+  var s = a.slice().sort(function (x, y) { return x - y; });
+  var mid = Math.floor(s.length / 2);
+  return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
+}
+function stdev(a) {
+  var m = mean(a);
+  return Math.sqrt(a.reduce(function (s, y) { return s + (y - m) * (y - m); }, 0) / (a.length || 1));
+}
+function kde1d(vals, grid, bw) {
+  return grid.map(function (g) {
+    var s = 0;
+    for (var j = 0; j < vals.length; j++) { var u = (g - vals[j]) / bw; s += Math.exp(-0.5 * u * u); }
+    return s / (vals.length * bw * 2.5066283);
+  });
+}
+
+F1Charts.onReady(function draw() {
+  var el = document.getElementById("c_pos");
+  if (!el) return;
+  var t = F1Charts.tokens();
+  var c = F1Charts.make(el);
+
+  var YMIN = 2, YMAX = 8;
+  var yGrid = []; for (var k = 0; k <= 48; k++) yGrid.push(YMIN + (YMAX - YMIN) * k / 48);
+
+  var violins = GROUPS.map(function (g, gi) {
+    // Finishing position is integer-valued, one apart. A bandwidth much
+    // under ~0.65 lets each integer's own kernel decay before the next
+    // one's picks up, so the curve dips between adjacent occupied
+    // integers even when both are well populated — a smoothing artifact,
+    // not a real bimodal gap. Floor raised accordingly; Silverman's rule
+    // still widens it further for a genuinely more spread-out group.
+    var bw = Math.max(1.06 * stdev(g.vals) * Math.pow(g.vals.length, -0.2) || 0, 0.53);
+    var d = kde1d(g.vals, yGrid, bw);
+    var dmax = Math.max.apply(null, d) || 1;
+    return { gi: gi, dens: d.map(function (x) { return x / dmax; }) };
+  });
+
+  var jitPts = [];
+  GROUPS.forEach(function (g, gi) {
+    g.vals.forEach(function (v, i) {
+      var jx = gi + (jitter(i, gi * 2) - 0.5) * 0.6;
+      var jy = v + (jitter(i, gi * 2 + 1) - 0.5) * 0.5;
+      jitPts.push([jx, jy]);
+    });
+  });
+
+  var meanPts = GROUPS.map(function (g, gi) { return [gi, mean(g.vals)]; });
+  var medPts = GROUPS.map(function (g, gi) { return [gi, median(g.vals)]; });
+
+  c.setOption({
+    grid: { left: 30, right: 18, top: 20, bottom: 46, containLabel: true },
+    xAxis: {
+      type: "value", min: -0.6, max: GROUPS.length - 0.4,
+      axisTick: { show: false }, axisLine: { show: false },
+      axisLabel: {
+        fontSize: 11, color: t.muted, lineHeight: 14,
+        customValues: GROUPS.map(function (_, i) { return i; }),
+        formatter: function (v) {
+          var lbl = GROUPS[Math.round(v)] ? GROUPS[Math.round(v)].label : "";
+          return lbl.replace(", ", "\n");
+        }
+      },
+      splitLine: { show: false }
+    },
+    yAxis: {
+      type: "value", min: YMIN, max: YMAX, inverse: true,
+      name: "Finishing position", nameLocation: "middle", nameGap: 26,
+      nameTextStyle: { color: t.faint, fontSize: 10 },
+      axisLabel: { fontSize: 11, formatter: function (v) { return "P" + Math.round(v); } },
+      splitLine: { lineStyle: { color: t.line, opacity: 0.5 } }
+    },
+    tooltip: { show: false },
+    series: [
+      { type: "custom", data: violins.map(function (_, i) { return i; }), silent: true, z: 1,
+        renderItem: function (params, api) {
+          var v = violins[params.dataIndex];
+          if (!v) return null;
+          var w = 0.34, pts = [];
+          v.dens.forEach(function (dd, i) { pts.push(api.coord([v.gi + dd * w, yGrid[i]])); });
+          for (var i = v.dens.length - 1; i >= 0; i--) pts.push(api.coord([v.gi - v.dens[i] * w, yGrid[i]]));
+          return { type: "polygon", shape: { points: pts },
+                   style: { fill: t.accent, opacity: 0.16, stroke: t.accent, lineWidth: 1.25 } };
+        } },
+      { type: "scatter", data: jitPts, symbolSize: 4.5, large: true, z: 2,
+        itemStyle: { color: t.ink, opacity: 0.16 } },
+      { type: "scatter", data: meanPts, symbol: "rect", symbolSize: [34, 4], z: 4,
+        itemStyle: { color: t.ink } },
+      { type: "scatter", data: medPts, symbol: "diamond", symbolSize: 11, z: 5,
+        itemStyle: { color: t.accent, borderColor: t.bg, borderWidth: 1 } }
+    ]
+  }, true);
+});
+</script>
+
+</body>
+</html>
