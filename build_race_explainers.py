@@ -30,6 +30,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # repo root, fo
 
 from pace_model.fit import fit_pace_model
 from pace_model.race_loading import load_clean_race
+from pace_model.variant_cache import load_or_fit_variants
 from pace_model.visualize import partial_residual
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -208,29 +209,22 @@ def _pick(arr):
     return RNG.choice(arr, MAX_POINTS, replace=False)
 
 
-def _compound_panel(model_df, X, model, fn):
-    """Base pace offset per compound vs the reference. Read off the partial-residual
-    cloud (mean left-over lap time on each compound) rather than the raw dummy
-    coefficient — a compound almost nobody ran (HARD in a sprint) gives a wild
-    coefficient but a bounded residual mean."""
-    comp_cols = [c for c in fn if c.startswith("compound_")]
-    if not comp_cols:
+def _compound_panel(deg_df):
+    """Pace offset per compound vs the reference compound on a fresh (age 1) tyre — the fit's own
+    offset_at_age1_sec (pace_model.summarize.add_fresh_offsets), so the bars are the dummy plus each
+    compound's tyre-age curve read at its start, not the offset at the mean tyre age. A compound
+    only 1-2 cars ran can't be separated from those cars' own pace — left off this panel."""
+    is_ref = deg_df["compound"].str.startswith("(reference:")
+    if not is_ref.any():
         return {"reference": None, "bars": []}
-    presid = partial_residual(model_df, X, model, fn, comp_cols)
-    counts = model_df.groupby("compound")["driver_number"].nunique().to_dict()
-    # a compound only 1-2 cars ran can't be separated from those cars' own pace
-    # (its dummy coefficient goes degenerate) — leave it off this panel
-    present = [c for c in COMPOUND_ORDER if counts.get(c, 0) >= 3]
+    ref = deg_df.loc[is_ref, "compound"].iloc[0][len("(reference: "):-1]
+    rows = deg_df.assign(compound=deg_df["compound"].where(~is_ref, ref)).set_index("compound")
+    present = [c for c in COMPOUND_ORDER if c in rows.index and rows.at[c, "n_drivers"] >= 3]
     if len(present) < 2:      # ~everyone on one compound (typical sprint) — no story here
         return {"reference": None, "bars": []}
-    ref = next((c for c in present if f"compound_{c}" not in comp_cols), present[-1])
-    ref_mean = float(presid[(model_df["compound"] == ref).to_numpy()].mean())
-    out = []
-    for c in present:
-        m = (model_df["compound"] == c).to_numpy()
-        out.append({"compound": c, "offset": _r(float(presid[m].mean()) - ref_mean, 3),
-                    "low_support": bool(counts[c] < 3), "is_ref": c == ref})
-    return {"reference": ref, "bars": out}
+    return {"reference": ref, "bars": [
+        {"compound": c, "offset": _r(float(rows.at[c, "offset_at_age1_sec"]), 3),
+         "low_support": False, "is_ref": c == ref} for c in present]}
 
 
 def build(year: int = YEAR) -> dict:
@@ -264,7 +258,8 @@ def build(year: int = YEAR) -> dict:
                 "temp": _linear_panel(mdf, X, model, fn, si, "track_temperature"),
                 "traffic": _traffic_panel(mdf, X, model, fn, si),
                 "overtake": _overtake_panel(mdf, X, model, fn),
-                "compound": _compound_panel(mdf, X, model, fn),
+                "compound": _compound_panel(load_or_fit_variants(pkl, [row["chosen_label"]], verbose=False)
+                                             .fits[row["chosen_label"]].degradation_df),
             },
         }
     return out

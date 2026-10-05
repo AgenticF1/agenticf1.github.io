@@ -53,6 +53,10 @@
   margin-bottom: var(--space-2);
 }
 .part__d { font-size: var(--step-2); font-weight: 600; }
+/* a part whose title is a real heading (a part with a single section: <h2 class="part__d">)
+   gets the same spacing as the usual <p class="part__d">, which takes its 16px from the
+   article's p + p rhythm and the body line-height */
+.part > h2.part__d { margin-top: var(--space-4); line-height: 1.6; letter-spacing: normal; }
 
 /* --- cards inside an article --- */
 .article .card { margin-block: 0; }

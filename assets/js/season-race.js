@@ -20,6 +20,8 @@
     document.getElementById("r-eyebrow").textContent = "Round " + RACE.round + " · " + RACE.date;
     document.getElementById("r-title").textContent = RACE.name + " — race pace";
     document.title = RACE.name + " race pace — AgenticF1";
+    var note = document.getElementById("r-note");
+    if (note) { note.textContent = RACE.note || ""; note.hidden = !RACE.note; }
     document.getElementById("r-whatif").href =
       "pace-whatif.html#race=" + encodeURIComponent(RACE.race_id);
   }
@@ -124,6 +126,99 @@
         { type: "line", shape: { x1: hi[0], y1: hi[1] - h, x2: hi[0], y2: hi[1] + h }, style: style }
       ]
     };
+  }
+
+  /* ---------- wet start: pace through the wet window, one tyre group at a time ---------- */
+  function drawWet() {
+    var W = RACE.wet_start, sec = document.getElementById("wet-section");
+    if (!sec) return;
+    if (!W || !W.groups || !W.groups.length) { sec.hidden = true; return; }
+    sec.hidden = false;
+    var t = F1Charts.tokens();
+    var teamOf = {};
+    W.groups.forEach(function (g) { g.drivers.forEach(function (d) { teamOf[d.name] = d.team; }); });
+    var colors = F1Charts.driverColors(Object.keys(teamOf), teamOf);
+
+    document.getElementById("wet-lead").innerHTML =
+      "This section shows how each driver ran the wet laps. The race started on a wet track. " +
+      "Some cars used intermediate tyres and some used slick tyres. " +
+      "Each of these two tyre types is a separate group, because cars on the same tyre type run in the same conditions. " +
+      "The two groups are not compared with each other.<br><br>" +
+      "A bar shows how much faster (left) or slower (right) a driver was than the median of the group. " +
+      "The median is the middle lap time of the group on the same lap. " +
+      "The data are laps " + W.first_lap + " to " + W.last_lap + ". " +
+      "The diamond shows where the dry pace of the driver says they should be. " +
+      "A bar to the left of the diamond means the driver did better in the wet than the dry pace shows.";
+
+    var host = document.getElementById("wet-groups");
+    host.innerHTML = "";
+    W.groups.forEach(function (g) {
+      var card = document.createElement("div");
+      card.className = "wet-group";
+      card.innerHTML = '<h3 class="t-h3">' + g.label + ", " + g.drivers.length + " cars</h3>" +
+        '<div class="season-chart" data-role="bars"></div>' +
+        '<p class="season-figure__sub">Each line is one driver. A line below 0 means the driver was faster than the group median on that lap.</p>' +
+        '<div class="season-chart" data-role="lines" style="height:260px"></div>';
+      host.appendChild(card);
+      wetBars(card.querySelector('[data-role="bars"]'), g, colors, t);
+      wetLines(card.querySelector('[data-role="lines"]'), g, W, colors, t);
+    });
+  }
+
+  function wetBars(el, g, colors, t) {
+    var rows = g.drivers;
+    el.style.height = (rows.length * 24 + 70) + "px";
+    var c = F1Charts.make(el);
+    c.setOption({
+      grid: { left: 8, right: 30, top: 18, bottom: 40, containLabel: true },
+      xAxis: { type: "value", name: "seconds per lap against the group median  (left is faster)", nameLocation: "middle", nameGap: 28,
+               splitLine: { lineStyle: { color: t.line, opacity: 0.5 } } },
+      yAxis: { type: "category", inverse: true, data: rows.map(function (d) { return d.name; }), axisLabel: { fontSize: 11 } },
+      tooltip: {
+        trigger: "item",
+        formatter: function (p) {
+          var d = rows[p.dataIndex];
+          var gap = Math.abs(d.pace).toFixed(2) + " s per lap " + (d.pace < 0 ? "faster" : "slower") + " than the group";
+          if (d.expected == null) return d.name + "<br>" + gap + "<br>" + d.n + " clean laps";
+          return d.name + "<br>" + gap + "<br>Dry pace says " + fmt(d.expected) + " s" +
+            "<br><b>" + Math.abs(d.beat).toFixed(2) + " s per lap " + (d.beat < 0 ? "better" : "worse") + " than the dry pace says</b>" +
+            "<br>" + d.n + " clean laps";
+        }
+      },
+      series: [
+        { type: "bar", barMaxWidth: 12,
+          itemStyle: { color: function (p) { return colors[rows[p.dataIndex].name] || t.muted; }, borderRadius: 3 },
+          data: rows.map(function (d) { return d.pace; }),
+          markLine: { silent: true, symbol: "none", lineStyle: { color: t.lineStrong, width: 1 },
+                      label: { show: false }, data: [{ xAxis: 0 }] } },
+        { type: "scatter", symbol: "diamond", symbolSize: 11, z: 4,
+          itemStyle: { color: t.surface, borderColor: t.ink, borderWidth: 1.5 },
+          data: rows.map(function (d, i) { return d.expected == null ? null : [d.expected, i]; }).filter(Boolean) }
+      ]
+    }, true);
+  }
+
+  function wetLines(el, g, W, colors, t) {
+    var laps = [];
+    for (var l = W.first_lap; l <= W.last_lap; l++) laps.push(l);
+    var legendRows = Math.ceil(g.drivers.length / 6);
+    el.style.height = (210 + legendRows * 24) + "px";
+    var c = F1Charts.make(el);
+    c.setOption({
+      grid: { left: 8, right: 16, top: 14 + legendRows * 24, bottom: 30, containLabel: true },
+      legend: { top: 0, textStyle: { fontSize: 10, color: t.muted }, itemWidth: 14, itemHeight: 3 },
+      xAxis: { type: "category", data: laps, name: "lap", nameLocation: "middle", nameGap: 22 },
+      yAxis: { type: "value", name: "seconds against the group median", nameLocation: "middle", nameGap: 36,
+               splitLine: { lineStyle: { color: t.line, opacity: 0.5 } } },
+      tooltip: { trigger: "axis", valueFormatter: function (v) { return v == null ? "none" : fmt(v, 1) + " s"; } },
+      series: g.drivers.map(function (d, i) {
+        return { name: d.name, type: "line", symbolSize: 5, connectNulls: false,
+                 lineStyle: { width: 2, color: colors[d.name] }, itemStyle: { color: colors[d.name] },
+                 data: laps.map(function (l) { var v = d.laps[String(l)]; return v == null ? null : v; }),
+                 markLine: i === 0 ? { silent: true, symbol: "none", lineStyle: { color: t.lineStrong, type: "dashed" },
+                                       label: { show: false }, data: [{ yAxis: 0 }] } : undefined };
+      })
+    }, true);
   }
 
   /* ---------- fitted pace distribution (spread across fitting runs) ---------- */
@@ -251,7 +346,7 @@
         : signed(c.overtake_mode_leq_1_0s_effect_sec, 2, " s") + " within 1 s";
     }
     if (key === "compound") return panel && panel.reference
-      ? "base pace vs the " + panel.reference.toLowerCase() + " tyre" : "";
+      ? "pace on a fresh tyre vs the " + panel.reference.toLowerCase() + " tyre" : "";
     return "";
   }
 
@@ -485,10 +580,12 @@
     F1Charts.onReady(function () {
       if (!RACE) return;
       drawPace();
+      drawWet();
       drawVariantSpread();
       drawExplainers();
     });
     drawPace();
+    drawWet();
     drawVariantSpread();
     drawExplainers();
   }

@@ -139,12 +139,12 @@
       var lin = coef[g.lin], quad = g.quad ? coef[g.quad] : 0, pts = [];
       var base = g.key === R.ref_compound ? 0 : (coef["compound_" + g.key] || 0);
       for (var i = 0; i <= 40; i++) {
-        var a = maxAge * i / 40, y = base + lin * a + quad * a * a;
+        var a = 1 + (maxAge - 1) * i / 40, y = base + lin * (a - 1) + quad * (a * a - 1);
         pts.push([a, y]); ymin = Math.min(ymin, y); ymax = Math.max(ymax, y);
       }
       return { g: g, pts: pts };
     });
-    var sx = function (a) { return padL + a / maxAge * (W - padL - padR); };
+    var sx = function (a) { return padL + (a - 1) / Math.max(maxAge - 1, 1e-9) * (W - padL - padR); };
     var sy = function (y) { return padT + (ymax - y) / (ymax - ymin) * (H - padT - padB); };
     series.forEach(function (o) {
       svg._paths[o.g.key].setAttribute("d", o.pts.map(function (p, i) {
@@ -167,8 +167,8 @@
 
     var label = document.createElement("div");
     label.className = "axis__label";
-    label.title = isRef ? compound + " — reference compound, pinned at 0" : "Base offset vs " + R.ref_compound;
-    label.textContent = "Base pace";
+    label.title = isRef ? compound + " — reference compound, pinned at 0" : "Pace offset vs " + R.ref_compound + " on a fresh (age 1) tyre";
+    label.textContent = "Offset";
     wrap.appendChild(label);
 
     if (isRef) {
@@ -231,7 +231,7 @@
     return col;
   }
 
-  // One shared axis (base offset) + one row per compound (linear/curvature),
+  // One shared axis (fresh-tyre offset) + one row per compound (linear/curvature),
   // merged into a single section — the curve figure includes the offset so
   // the gap between curves is real relative pace, not just relative wear.
   function compoundPaceSection() {
@@ -244,8 +244,8 @@
     s.className = "grp";
     s.innerHTML = '<div class="grp__head"><h3 title="Compound pace">Compound pace</h3>' +
       (allKeys.length ? '<button class="link" data-reset>reset</button>' : "") + "</div>" +
-      '<div class="note">' + R.ref_compound + " pinned at 0. Each compound: base offset on top, " +
-      "linear/curvature degradation below — includes the offset, so curve gaps are real relative pace.</div>";
+      '<div class="note">' + R.ref_compound + " pinned at 0. Each compound: fresh-tyre (age 1) offset on top, " +
+      "linear/curvature degradation below — curves start at that offset, so gaps between curves are real relative pace.</div>";
 
     var lo = 0, hi = 0;
     offsetKeys.forEach(function (k) {

@@ -20,6 +20,7 @@ Run from the repo root:  conda run -n basic python agentic_f1_project_page/build
 from __future__ import annotations
 
 import json
+import sys
 from datetime import date
 from pathlib import Path
 
@@ -27,6 +28,16 @@ import numpy as np
 import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))  # for pace_model
+
+from pace_model.wet import RACE_DEFAULT_WET_POLICY  # noqa: E402
+from pace_model.wet_phase import GROUP_LABELS  # noqa: E402
+
+# shown on the season page (column marker + footnote) and the race page for a race whose
+# displayed fit is not the ordinary one, keyed by pace_model.wet's per-race default policy
+WET_POLICY_NOTES = {
+    "dry_only": "Dry laps only. The pace fit does not use laps 1 to 9, because the race started wet.",
+}
 SITE = REPO_ROOT / "agentic_f1_project_page"
 YEAR = 2026
 
@@ -162,6 +173,32 @@ def _variant_analysis(race_id: str, ao: Path):
     return out, sensitivity
 
 
+def _wet_start(rid: str, ao: Path) -> dict | None:
+    """Pace through a wet-start race's wet window, one tyre group at a time (never across groups),
+    from pace_model.wet_phase's CSVs; None for a race that did not start wet."""
+    d = ao / rid / "wet_policy"
+    sp, lp = d / "wet_phase_summary.csv", d / "wet_phase_laps.csv"
+    if not (sp.exists() and lp.exists()):
+        return None
+    s = pd.read_csv(sp, dtype={"driver_number": str})
+    laps = pd.read_csv(lp, dtype={"driver_number": str})
+    groups = []
+    for key in ("INTERMEDIATE", "SLICK"):
+        g = s[s["group"] == key].sort_values("vs_group_median")
+        if g.empty:
+            continue
+        drivers = []
+        for r in g.itertuples():
+            mine = laps[laps["driver_number"] == r.driver_number].sort_values("lap")
+            drivers.append({
+                "name": r.driver_name, "team": r.team, "n": int(r.n_laps),
+                "pace": _f(r.vs_group_median), "expected": _f(r.expected_vs_group), "beat": _f(r.beat_expected),
+                "laps": {str(int(a)): _f(b) for a, b in zip(mine["lap"], mine["vs_group"])},
+            })
+        groups.append({"key": key, "label": GROUP_LABELS[key], "drivers": drivers})
+    return {"first_lap": int(laps["lap"].min()), "last_lap": int(laps["lap"].max()), "groups": groups}
+
+
 def build(year: int = YEAR) -> dict:
     ao = REPO_ROOT / "analysis_out"
     cur = ao / f"season_{year}_pace_curated"
@@ -234,6 +271,8 @@ def build(year: int = YEAR) -> dict:
             "sensitivity": sens,
             "coef": cs,
             "insights": insights.get(rid, []),
+            "note": WET_POLICY_NOTES.get(RACE_DEFAULT_WET_POLICY.get(rid)),
+            "wet_start": _wet_start(rid, ao),
             "tyre_age_laps_remaining_corr": _f(sel.get("tyre_age_laps_remaining_corr")),
             "top_n": [num_to_name.get(str(n), str(n)) for n in (sel.get("top_n_ids") or [])],
             "pace": _race_pace_rows(gd),

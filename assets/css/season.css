@@ -265,3 +265,7 @@
   background: var(--accent-quiet);
   color: var(--accent-ink);
 }
+
+/* race page: wet-start section — one card per tyre group */
+.wet-group { margin-top: var(--space-6, 2.5rem); }
+.wet-group > .t-h3 { margin-bottom: var(--space-3); }

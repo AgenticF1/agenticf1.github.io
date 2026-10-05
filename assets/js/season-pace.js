@@ -29,7 +29,7 @@
   // columns up exactly, and so their columns scroll at the same width.
   var COL_W = 34;
   function raceCats() {
-    return DATA.races.map(function (r) { return r.short || r.name; }).concat(["", "Season"]);
+    return DATA.races.map(function (r) { return (r.short || r.name) + (r.note ? "*" : ""); }).concat(["", "Season"]);
   }
   function isDark(bg) {
     var h = String(bg).replace("#", "");
@@ -114,7 +114,8 @@
             return d.name + "<br>season average · " + pctFmt(d.season_pct) + " · " + fmt(d.season_gap) + " s";
           }
           var r = DATA.races[p.value[0]], g = d.gaps[r.race_id] || {};
-          return d.name + " — " + r.name + "<br>" + pctFmt(g.pct) + " off fastest · " + fmt(g.s) + " s";
+          return d.name + " — " + r.name + "<br>" + pctFmt(g.pct) + " off fastest · " + fmt(g.s) + " s" +
+            (r.note ? "<br><i>" + r.note + "</i>" : "");
         }
       },
       series: [{
@@ -278,6 +279,17 @@
     return '<dl class="coef-readout">' + items.join("") + "</dl>";
   }
 
+  // footnote under the driver grid for every race whose fit is not the ordinary one
+  function drawNotes() {
+    var host = document.getElementById("season-notes");
+    if (!host || !DATA) return;
+    var lines = DATA.races.filter(function (r) { return r.note; }).map(function (r) {
+      return "* " + r.name + ": " + r.note;
+    });
+    host.innerHTML = lines.join("<br>");
+    host.hidden = !lines.length;
+  }
+
   function buildList() {
     var host = document.getElementById("race-list");
     if (!host || !DATA) return;
@@ -291,7 +303,7 @@
           '<span class="race-row__rnd">R' + race.round + "</span>" +
           "<span>" +
             '<span class="race-row__name">' + race.name + "</span>" +
-            '<span class="race-row__meta">' + race.session_type + " · " + race.date + "</span>" +
+            '<span class="race-row__meta">' + race.session_type + " · " + race.date + (race.note ? " · dry laps only" : "") + "</span>" +
           "</span>" +
           '<span class="race-row__chev" aria-hidden="true">+</span>' +
         "</button>" +
@@ -324,6 +336,7 @@
     load(function () {
       drawDrivers();
       drawTeams();
+      drawNotes();
       buildList();
     });
   });
