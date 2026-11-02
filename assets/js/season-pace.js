@@ -303,7 +303,7 @@
           '<span class="race-row__rnd">R' + race.round + "</span>" +
           "<span>" +
             '<span class="race-row__name">' + race.name + "</span>" +
-            '<span class="race-row__meta">' + race.session_type + " · " + race.date + (race.note ? " · dry laps only" : "") + "</span>" +
+            '<span class="race-row__meta">' + race.session_type + " · " + race.date + (race.note ? " · " + (race.note_label || "adjusted fit") : "") + "</span>" +
           "</span>" +
           '<span class="race-row__chev" aria-hidden="true">+</span>' +
         "</button>" +

@@ -37,7 +37,10 @@ from pace_model.wet_phase import GROUP_LABELS  # noqa: E402
 # displayed fit is not the ordinary one, keyed by pace_model.wet's per-race default policy
 WET_POLICY_NOTES = {
     "dry_only": "Dry laps only. The pace fit does not use laps 1 to 9, because the race started wet.",
+    "clean_air_subset": "Russell and Hadjar are fitted on their clean-air laps only, because both spent the race in traffic. Every other driver uses all clean laps.",
 }
+# short tag after the date on the season page's race list, same keys
+WET_POLICY_LABELS = {"dry_only": "dry laps only", "clean_air_subset": "clean-air fit for two drivers"}
 SITE = REPO_ROOT / "agentic_f1_project_page"
 YEAR = 2026
 
@@ -272,6 +275,7 @@ def build(year: int = YEAR) -> dict:
             "coef": cs,
             "insights": insights.get(rid, []),
             "note": WET_POLICY_NOTES.get(RACE_DEFAULT_WET_POLICY.get(rid)),
+            "note_label": WET_POLICY_LABELS.get(RACE_DEFAULT_WET_POLICY.get(rid)),
             "wet_start": _wet_start(rid, ao),
             "tyre_age_laps_remaining_corr": _f(sel.get("tyre_age_laps_remaining_corr")),
             "top_n": [num_to_name.get(str(n), str(n)) for n in (sel.get("top_n_ids") or [])],
